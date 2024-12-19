@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "name": "Firefly",
+    "element": "fire",
+    "destiny": "destruction",
+    "rarity": 5,
+    "image": "https://fastcdn.hoyoverse.com/content-v2/hkrpg/123957/8f37dbc91598d1eebdadca8e9d22a6f6_6237269238409818844.png",
+    "avatar": "https://fastcdn.hoyoverse.com/content-v2/hkrpg/123957/eddd5af6c42f41ed314607e2048fc4c1_400660068951524543.png"
+  },
+  {
+    "id": 2,
+    "name": "Kafka",
+    "element": "lightning",
+    "destiny": "nihility",
+    "rarity": 5,
+    "image": "https://webstatic.hoyoverse.com/upload/op-public/2022/04/11/d9ab700ee0713acf78eb04d930f5c3fc_4622587084501383915.png",
+    "avatar": "https://webstatic.hoyoverse.com/upload/op-public/2022/04/11/d1b3460138c3177e3f7b5e458149a98f_3206169365070932548.png"
+  },
+  {
+    "id": 3,
+    "name": "Silver Wolf",
+    "element": "quantum",
+    "destiny": "nihility",
+    "rarity": 5,
+    "image": "https://webstatic.hoyoverse.com/upload/op-public/2022/04/11/72d6e7d3bd7dd99d9c77141aec062999_6026974045289873224.png",
+    "avatar": "https://webstatic.hoyoverse.com/upload/op-public/2022/04/11/1a466be8e63956379c6c5f718ef2deb6_7873511825031799382.png"
+  },
+  {
+    "id": 4,
+    "name": "Blade",
+    "element": "wind",
+    "destiny": "destruction",
+    "rarity": 5,
+    "image": "https://webstatic.hoyoverse.com/upload/op-public/2023/07/18/e54575501d95b7e94b3707fd013a96f4_1799829791872313701.png",
+    "avatar": "https://webstatic.hoyoverse.com/upload/op-public/2023/07/18/b5e05f52778d84ef274a4467e78ce974_6070636965350012194.png"
+  }
+]

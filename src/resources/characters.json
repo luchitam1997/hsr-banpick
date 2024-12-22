@@ -34,5 +34,149 @@
     "rarity": 5,
     "image": "https://webstatic.hoyoverse.com/upload/op-public/2023/07/18/e54575501d95b7e94b3707fd013a96f4_1799829791872313701.png",
     "avatar": "https://webstatic.hoyoverse.com/upload/op-public/2023/07/18/b5e05f52778d84ef274a4467e78ce974_6070636965350012194.png"
+  },
+  {
+    "id": 5,
+    "name": "Himeko",
+    "element": "fire",
+    "destiny": "erudition",
+    "rarity": 5,
+    "image": "https://webstatic.hoyoverse.com/upload/op-public/2022/04/11/3d96d8c51cd7ccd68b7c681755561fa5_7152996143909918686.png",
+    "avatar": "https://webstatic.hoyoverse.com/upload/op-public/2022/04/11/3f9c0361b06fb37e7a85a834d9ed671b_4678074096525310440.png"
+  },
+  {
+    "id": 6,
+    "name": "Welt",
+    "element": "imaginary",
+    "destiny": "nihility",
+    "rarity": 5,
+    "image": "https://webstatic.hoyoverse.com/upload/op-public/2022/04/11/2cbe5c4e73c129c140011d0e74e170f2_7582024745908492117.png",
+    "avatar": "https://webstatic.hoyoverse.com/upload/op-public/2022/04/11/2e22e3967611816c18c91f1fba04514a_62309436164861789.png"
+  },
+  {
+    "id": 7,
+    "name": "Dan Heng",
+    "element": "wind",
+    "destiny": "the-hunt",
+    "rarity": 4,
+    "image": "https://webstatic.hoyoverse.com/upload/op-public/2022/04/10/d19b21747ebcf14889be727814638881_883457710415216179.png",
+    "avatar": "https://webstatic.hoyoverse.com/upload/op-public/2022/04/10/2b5dd87cd8085008294478f0743d6b74_3933672372802926291.png"
+  },
+  {
+    "id": 8,
+    "name": "March 7th (Preservation)",
+    "element": "ice",
+    "destiny": "preservation",
+    "rarity": 4,
+    "image": "https://webstatic.hoyoverse.com/upload/op-public/2023/01/20/5c8d609b828268900487a5bfa7d09216_750547321424347801.png",
+    "avatar": "https://webstatic.hoyoverse.com/upload/op-public/2023/01/20/6a303ecc85952b4a11c5972cb69b56eb_1974420477665575473.png"
+  },
+  {
+    "id": 9,
+    "name": "March 7th (The Hunt)",
+    "element": "imaginary",
+    "destiny": "the-hunt",
+    "rarity": 4,
+    "image": "https://fastcdn.hoyoverse.com/content-v2/hkrpg/124841/70f9cc3cb4d0c0deff2bdae077b389ff_1056449609531264267.png",
+    "avatar": "https://fastcdn.hoyoverse.com/content-v2/hkrpg/124841/5e4f33b547e1652a89b51278c864ffcc_656973769368160077.png"
+  },
+  {
+    "id": 10,
+    "name": "Gepard",
+    "element": "ice",
+    "destiny": "preservation",
+    "rarity": 5,
+    "image": "https://webstatic.hoyoverse.com/upload/op-public/2022/04/11/afff80130ec2ac6c9fd3a6ecae8d1261_5790475248587602983.png",
+    "avatar": "https://webstatic.hoyoverse.com/upload/op-public/2022/04/11/019513b7e44dd4432d03b143ae4713d2_4785442007181626187.png"
+  },
+  {
+    "id": 11,
+    "name": "Bronya",
+    "element": "wind",
+    "destiny": "harmony",
+    "rarity": 5,
+    "image": "https://webstatic.hoyoverse.com/upload/op-public/2022/04/11/3d3aa1617c74e00b70c0dc1e396c7349_9085422915139236704.png",
+    "avatar": "https://webstatic.hoyoverse.com/upload/op-public/2022/04/11/80e5957c2152c680220c4cb0eb9fb6d4_35087548008651410.png"
+  },
+  {
+    "id": 12,
+    "name": "Seele",
+    "element": "quantum",
+    "destiny": "the-hunt",
+    "rarity": 5,
+    "image": "https://webstatic.hoyoverse.com/upload/op-public/2022/04/11/b7839da915afe78dd92ca36ecbb99e88_7126394133171521969.png",
+    "avatar": "https://webstatic.hoyoverse.com/upload/op-public/2022/04/11/16f621b91071770249deead6bf545685_8643581563487265544.png"
+  },
+  {
+    "id": 13,
+    "name": "Clara",
+    "element": "physical",
+    "destiny": "destruction",
+    "rarity": 5,
+    "image": "https://webstatic.hoyoverse.com/upload/op-public/2022/04/28/1f05b9ca08710d0579e37c196093e119_5567216459965530528.png",
+    "avatar": "https://webstatic.hoyoverse.com/upload/op-public/2022/04/11/16a5b5bd44392f616ac05545966b8fe8_5566256866340016142.png"
+  },
+  {
+    "id": 14,
+    "name": "Sampo",
+    "element": "wind",
+    "destiny": "nihility",
+    "rarity": 4,
+    "image": "https://webstatic.hoyoverse.com/upload/op-public/2022/04/11/b82eefaf3431d2417565b3ef9e7fe711_3246573965088945300.png",
+    "avatar": "https://webstatic.hoyoverse.com/upload/op-public/2022/04/11/9e642298251093ce3d0c8ec831079286_3274217132443093747.png"
+  },
+  {
+    "id": 15,
+    "name": "Pela",
+    "element": "ice",
+    "destiny": "nihility",
+    "rarity": 4,
+    "image": "https://webstatic.hoyoverse.com/upload/op-public/2023/01/20/3bbc05c38c89aebf796e1ce56cd1b752_2781861129747590951.png",
+    "avatar": "https://webstatic.hoyoverse.com/upload/op-public/2023/01/20/03c0cf893c6b144bd0735e15009d3f06_8296694912460836348.png"
+  },
+  {
+    "id": 16,
+    "name": "Serval",
+    "element": "lightning",
+    "destiny": "erudition",
+    "rarity": 4,
+    "image": "https://webstatic.hoyoverse.com/upload/op-public/2022/04/11/1836168f23c1d2dd58082be166b39bfc_6092968126586801476.png",
+    "avatar": "https://webstatic.hoyoverse.com/upload/op-public/2022/04/11/2d3405440adbb7d42669088f7c21d546_4686109164151957112.png"
+  },
+  {
+    "id": 17,
+    "name": "Natasha",
+    "element": "physical",
+    "destiny": "abundance",
+    "rarity": 4,
+    "image": "https://webstatic.hoyoverse.com/upload/op-public/2022/04/11/c3982eed352e8d211b259a7f98123d90_483423611456730788.png",
+    "avatar": "https://webstatic.hoyoverse.com/upload/op-public/2022/04/11/6d96ee352e4283e7bb4a0ef05bbf1343_8752092412805116232.png"
+  },
+  {
+    "id": 18,
+    "name": "Hook",
+    "element": "fire",
+    "destiny": "destruction",
+    "rarity": 4,
+    "image": "https://webstatic.hoyoverse.com/upload/op-public/2022/09/30/3ee9b1f7ccf7c84a0ab90a6d3a16be60_2961599058091642386.png",
+    "avatar": "https://webstatic.hoyoverse.com/upload/op-public/2022/09/30/13edc8df15ad3841bd5d6418001f94a1_7166496546599015952.png"
+  },
+  {
+    "id": 19,
+    "name": "Luka",
+    "element": "physical",
+    "destiny": "nihility",
+    "rarity": 4,
+    "image": "https://webstatic.hoyoverse.com/upload/op-public/2023/07/18/e7160cbbd99f9ab3767f8d82696f98b8_3413885389195001760.png",
+    "avatar": "https://webstatic.hoyoverse.com/upload/op-public/2023/07/18/e7a993af39c40ffb585e10cc6321915c_7271303793538035148.png"
+  },
+  {
+    "id": 20,
+    "name": "Lynx",
+    "element": "quantum",
+    "destiny": "abundance",
+    "rarity": 4,
+    "image": "https://webstatic.hoyoverse.com/upload/op-public/2023/08/25/118ffff853e10702075622ec965b544d_1507744005339764670.png",
+    "avatar": "https://webstatic.hoyoverse.com/upload/op-public/2023/08/25/6a04865a1bb5ead132ae0634d9db19cf_4031096838282238632.png"
   }
 ]

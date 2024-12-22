@@ -1,8 +1,4 @@
-import Image from "next/image";
-import characters from "../resources/characters.json";
-import { DESTINIES } from "@/constants/destinies";
 import { TeamColumn } from "@/components/TeamColumn";
-import { useState } from "react";
 import { SelectCharacter } from "@/components/SelectCharacter";
 
 export default function Home() {

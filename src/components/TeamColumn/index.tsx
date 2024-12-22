@@ -49,7 +49,10 @@ export function TeamColumn({ team, name, winCount }: TeamColumnProps) {
       {/* Pick Cards */}
       <div className="w-full grid grid-cols-2 gap-3">
         {characters.slice(0, 8).map((character, index) => (
-          <div className="w-full h-[120px] bg-[#1c1c1c] border border-[#272727] rounded flex items-center justify-between">
+          <div
+            key={index}
+            className="w-full h-[120px] bg-[#1c1c1c] border border-[#272727] rounded flex items-center justify-between"
+          >
             <img
               src={character.avatar}
               alt={character.name}
@@ -62,7 +65,7 @@ export function TeamColumn({ team, name, winCount }: TeamColumnProps) {
       {/* Ban Cards */}
       <div className="w-full grid grid-cols-2 gap-3 mt-5">
         {characters.slice(0, 2).map((character, index) => (
-          <div className="relative">
+          <div key={index} className="relative">
             <img
               src={character.avatar}
               alt={character.name}

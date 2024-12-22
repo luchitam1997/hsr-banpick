@@ -66,6 +66,7 @@ export function SelectCharacter() {
         <div className="flex gap-2">
           {DESTINIES.map((destiny, index) => (
             <div
+              key={index}
               className={` pb-2 ${
                 filter.destiny === destiny.slug && "border-b-2 border-secondary"
               }`}
@@ -73,7 +74,6 @@ export function SelectCharacter() {
               <img
                 src={destiny.icon}
                 alt={destiny.name}
-                key={index}
                 className={`w-12 h-12 cursor-pointer hover:opacity-50 `}
                 onClick={() => handleFilterDestiny(destiny.slug)}
               />
@@ -96,6 +96,7 @@ export function SelectCharacter() {
           <div className="w-full grid grid-cols-8 gap-2">
             {filteredCharacters.map((character, index) => (
               <img
+                key={index}
                 src={character.avatar}
                 alt={character.name}
                 className="cursor-pointer hover:opacity-50"

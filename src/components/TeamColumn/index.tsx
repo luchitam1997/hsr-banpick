@@ -23,11 +23,7 @@ export function TeamColumn({ team, name, winCount }: TeamColumnProps) {
             <div
               className={`w-[100px] h-[40px] bg-blue-500 transform skew-x-[20deg] flex items-center justify-center mr-2`}
             >
-              <p
-                className={`text-primary text-2xl font-bold -skew-x-[${
-                  team === "blue" ? "20deg" : "-20deg"
-                }]`}
-              >
+              <p className={`text-primary text-2xl font-bold -skew-x-[20deg]`}>
                 {winCountToRoman}
               </p>
             </div>

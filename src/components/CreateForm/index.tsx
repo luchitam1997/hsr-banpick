@@ -2,23 +2,52 @@ import { useState } from "react";
 import { Input } from "../Input";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
+const grid = 8;
+
+const getItemStyle = (isDragging: boolean, draggableStyle: any) => ({
+  // some basic styles to make the items look a bit nicer
+  userSelect: "none",
+  padding: grid * 2,
+  margin: `0 0 ${grid}px 0`,
+
+  // change background colour if dragging
+  background: isDragging ? "lightgreen" : "grey",
+
+  // styles we need to apply on draggables
+  ...draggableStyle,
+});
+
+const getListStyle = (isDraggingOver: boolean) => ({
+  background: isDraggingOver ? "lightblue" : "lightgrey",
+  padding: grid,
+  width: "100%",
+});
+
 export function CreateForm() {
   const [roomData, setRoomData] = useState({
     name: "",
-    banAmount: 2,
-    pickAmount: 8,
+    banAmount: 0,
+    pickAmount: 0,
     status: "waiting",
-    pickBanOrder: [],
+    pickBanOrder: [] as string[],
   });
 
-  const [builtOrder, setBuiltOrder] = useState<string[]>([]);
+  const reorder = (list: string[], startIndex: number, endIndex: number) => {
+    const result = Array.from(list);
+    const [removed] = result.splice(startIndex, 1);
+    result.splice(endIndex, 0, removed);
+    return result;
+  };
 
   const onDragEnd = (result: any) => {
     if (!result.destination) return;
 
-    const item = orderItems[result.source.index];
-    const newBuiltOrder = [...builtOrder, item.content[0]];
-    setBuiltOrder(newBuiltOrder);
+    const newOrder = reorder(
+      roomData.pickBanOrder,
+      result.source.index,
+      result.destination.index
+    );
+    setRoomData({ ...roomData, pickBanOrder: newOrder });
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -27,6 +56,30 @@ export function CreateForm() {
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.name === "banAmount") {
+      setRoomData({
+        ...roomData,
+        banAmount: Number(e.target.value),
+        pickBanOrder: [
+          ...Array(e.target.value).fill("ban"),
+          ...Array(roomData.pickAmount).fill("pick"),
+        ],
+      });
+      return;
+    }
+
+    if (e.target.name === "pickAmount") {
+      setRoomData({
+        ...roomData,
+        pickAmount: Number(e.target.value),
+        pickBanOrder: [
+          ...Array(roomData.banAmount).fill("ban"),
+          ...Array(e.target.value).fill("pick"),
+        ],
+      });
+      return;
+    }
+
     setRoomData({ ...roomData, [e.target.name]: e.target.value });
   };
 
@@ -38,6 +91,7 @@ export function CreateForm() {
           onChange={handleChange}
           name="name"
           value={roomData.name}
+          placeholder="Enter room name"
         />
       </div>
 
@@ -66,52 +120,39 @@ export function CreateForm() {
         </label>
         <div className="flex gap-4">
           <DragDropContext onDragEnd={onDragEnd}>
-            <div className="flex-1 p-4 border rounded-md">
-              <Droppable droppableId="available">
-                {(provided) => (
-                  <div
-                    {...provided.droppableProps}
-                    ref={provided.innerRef}
-                    className="space-y-2"
-                  >
-                    {orderItems.map((item, index) => (
-                      <Draggable
-                        key={item.id}
-                        draggableId={item.id}
-                        index={index}
-                      >
-                        {(provided) => (
-                          <div
-                            ref={provided.innerRef}
-                            {...provided.draggableProps}
-                            {...provided.dragHandleProps}
-                            className="p-2 bg-gray-100 rounded cursor-move"
-                          >
-                            {item.content}
-                          </div>
-                        )}
-                      </Draggable>
-                    ))}
-                    {provided.placeholder}
-                  </div>
-                )}
-              </Droppable>
-            </div>
-          </DragDropContext>
-
-          <div className="flex-1 p-4 border rounded-md">
-            <div className="font-medium mb-2">Current Order:</div>
-            <div className="flex flex-wrap gap-1">
-              {builtOrder.map((item, index) => (
-                <span
-                  key={index}
-                  className="px-2 py-1 bg-secondary text-white rounded"
+            <Droppable droppableId="droppable">
+              {(provided, snapshot) => (
+                <div
+                  {...provided.droppableProps}
+                  ref={provided.innerRef}
+                  style={getListStyle(snapshot.isDraggingOver)}
                 >
-                  {item === "B" ? "Ban" : "Pick"}
-                </span>
-              ))}
-            </div>
-          </div>
+                  {roomData.pickBanOrder.map((item, index) => (
+                    <Draggable
+                      key={index}
+                      draggableId={index.toString()}
+                      index={index}
+                    >
+                      {(provided, snapshot) => (
+                        <div
+                          ref={provided.innerRef}
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
+                          style={getItemStyle(
+                            snapshot.isDragging,
+                            provided.draggableProps.style
+                          )}
+                        >
+                          {item === "ban" ? "Ban" : "Pick"}
+                        </div>
+                      )}
+                    </Draggable>
+                  ))}
+                  {provided.placeholder}
+                </div>
+              )}
+            </Droppable>
+          </DragDropContext>
         </div>
       </div>
 

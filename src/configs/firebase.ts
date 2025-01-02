@@ -1,4 +1,5 @@
 import { FirebaseOptions, initializeApp } from "firebase/app";
+
 import { getDatabase } from "firebase/database";
 
 const firebaseConfig: FirebaseOptions = {
@@ -10,6 +11,6 @@ const firebaseConfig: FirebaseOptions = {
   messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
-
 const app = initializeApp(firebaseConfig);
+
 export const database = getDatabase(app);

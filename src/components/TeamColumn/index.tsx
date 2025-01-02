@@ -1,12 +1,23 @@
-import characters from "@/resources/characters.json";
 import { useMemo } from "react";
+import PickCard from "../PickCard";
+import BanCard from "../BanCard";
 
 interface TeamColumnProps {
   team: "blue" | "red";
   name: string;
   winCount: number;
+  pick: string[];
+  ban: string[];
 }
-export function TeamColumn({ team, name, winCount }: TeamColumnProps) {
+export function TeamColumn({
+  team,
+  name,
+  winCount,
+  pick,
+  ban,
+}: TeamColumnProps) {
+  console.log(pick);
+  console.log(ban);
   const winCountToRoman = useMemo(() => {
     if (!winCount) return "";
     const romanNumerals = ["I", "II", "III", "IV", "V"];
@@ -44,31 +55,15 @@ export function TeamColumn({ team, name, winCount }: TeamColumnProps) {
 
       {/* Pick Cards */}
       <div className="w-full grid grid-cols-2 gap-3">
-        {characters.slice(0, 8).map((character, index) => (
-          <div
-            key={index}
-            className="w-full h-[120px] bg-[#1c1c1c] border border-[#272727] rounded flex items-center justify-between"
-          >
-            <img
-              src={character.avatar}
-              alt={character.name}
-              className="h-full w-auto"
-            />
-          </div>
+        {pick.map((character, index) => (
+          <PickCard key={index} name={character} />
         ))}
       </div>
 
       {/* Ban Cards */}
       <div className="w-full grid grid-cols-2 gap-3 mt-5">
-        {characters.slice(0, 2).map((character, index) => (
-          <div key={index} className="relative">
-            <img
-              src={character.avatar}
-              alt={character.name}
-              className="w-full h-auto grayscale"
-            />
-            {/* <img src="/icons/ban.png" className="absolute bottom-0" /> */}
-          </div>
+        {ban.map((character, index) => (
+          <BanCard key={index} name={character} />
         ))}
       </div>
     </div>

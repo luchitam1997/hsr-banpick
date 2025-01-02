@@ -1,4 +1,4 @@
-import { TeamColumn } from "@/components/TeamColumn";
+// import { TeamColumn } from "@/components/TeamColumn";
 import { SelectCharacter } from "@/components/SelectCharacter";
 
 export default function Audiences() {
@@ -14,12 +14,12 @@ export default function Audiences() {
 
       <div className="mt-4 flex flex-row gap-4">
         {/* Team A */}
-        <TeamColumn team="blue" name="Blue Team" winCount={1} />
+        {/* <TeamColumn team="blue" name="Blue Team" winCount={1} /> */}
 
         <SelectCharacter />
 
         {/* Team B */}
-        <TeamColumn team="red" name="Red Team" winCount={2} />
+        {/* <TeamColumn team="red" name="Red Team" winCount={2} /> */}
       </div>
     </main>
   );

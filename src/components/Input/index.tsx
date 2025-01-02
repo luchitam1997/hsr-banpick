@@ -11,7 +11,7 @@ export function Input({
   label,
   error,
   containerClassName = "",
-  labelClassName = "block text-sm font-medium text-primary",
+  labelClassName = "block text-base font-medium text-primary",
   inputClassName = "mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 outline-none",
   errorClassName = "text-red-500 text-sm mt-1",
   ...props

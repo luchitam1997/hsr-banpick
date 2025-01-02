@@ -1,54 +1,19 @@
 import { useState } from "react";
 import { Input } from "../Input";
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-
-const grid = 8;
-
-const getItemStyle = (isDragging: boolean, draggableStyle: any) => ({
-  // some basic styles to make the items look a bit nicer
-  userSelect: "none",
-  padding: grid * 2,
-  margin: `0 0 ${grid}px 0`,
-
-  // change background colour if dragging
-  background: isDragging ? "lightgreen" : "grey",
-
-  // styles we need to apply on draggables
-  ...draggableStyle,
-});
-
-const getListStyle = (isDraggingOver: boolean) => ({
-  background: isDraggingOver ? "lightblue" : "lightgrey",
-  padding: grid,
-  width: "100%",
-});
+import Link from "next/link";
+import { useCopyToClipboard } from "usehooks-ts";
+import Image from "next/image";
 
 export function CreateForm() {
   const [roomData, setRoomData] = useState({
     name: "",
-    banAmount: 0,
-    pickAmount: 0,
+    teamA: "",
+    teamB: "",
     status: "waiting",
     pickBanOrder: [] as string[],
   });
 
-  const reorder = (list: string[], startIndex: number, endIndex: number) => {
-    const result = Array.from(list);
-    const [removed] = result.splice(startIndex, 1);
-    result.splice(endIndex, 0, removed);
-    return result;
-  };
-
-  const onDragEnd = (result: any) => {
-    if (!result.destination) return;
-
-    const newOrder = reorder(
-      roomData.pickBanOrder,
-      result.source.index,
-      result.destination.index
-    );
-    setRoomData({ ...roomData, pickBanOrder: newOrder });
-  };
+  const [, copy] = useCopyToClipboard();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -56,35 +21,29 @@ export function CreateForm() {
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.name === "banAmount") {
-      setRoomData({
-        ...roomData,
-        banAmount: Number(e.target.value),
-        pickBanOrder: [
-          ...Array(e.target.value).fill("ban"),
-          ...Array(roomData.pickAmount).fill("pick"),
-        ],
-      });
-      return;
-    }
-
-    if (e.target.name === "pickAmount") {
-      setRoomData({
-        ...roomData,
-        pickAmount: Number(e.target.value),
-        pickBanOrder: [
-          ...Array(roomData.banAmount).fill("ban"),
-          ...Array(e.target.value).fill("pick"),
-        ],
-      });
-      return;
-    }
-
     setRoomData({ ...roomData, [e.target.name]: e.target.value });
   };
 
+  const onBanClick = () => {
+    setRoomData({
+      ...roomData,
+      pickBanOrder: [...roomData.pickBanOrder, "ban"],
+    });
+  };
+
+  const onPickClick = () => {
+    setRoomData({
+      ...roomData,
+      pickBanOrder: [...roomData.pickBanOrder, "pick"],
+    });
+  };
+
+  const onClearClick = () => {
+    setRoomData({ ...roomData, pickBanOrder: [] });
+  };
+
   return (
-    <form onSubmit={handleSubmit} className="w-full max-w-md space-y-4">
+    <form onSubmit={handleSubmit} className="w-full max-w-lg space-y-4">
       <div>
         <Input
           label="Room Name"
@@ -98,61 +57,66 @@ export function CreateForm() {
       <div className="grid grid-cols-2 gap-4">
         <div>
           <Input
-            label="Ban Amount"
+            label="Team A"
             onChange={handleChange}
-            name="banAmount"
-            value={roomData.banAmount}
+            name="teamA"
+            value={roomData.teamA}
+            placeholder="Enter team A name"
           />
         </div>
+
         <div>
           <Input
-            label="Pick Amount"
+            label="Team B"
             onChange={handleChange}
-            name="pickAmount"
-            value={roomData.pickAmount}
+            name="teamB"
+            value={roomData.teamB}
+            placeholder="Enter room name"
           />
         </div>
       </div>
 
       <div className="space-y-2">
-        <label className="block text-sm font-medium text-gray-700">
+        <label className="block text-base font-medium text-primary">
           Build Pick/Ban Order
         </label>
         <div className="flex gap-4">
-          <DragDropContext onDragEnd={onDragEnd}>
-            <Droppable droppableId="droppable">
-              {(provided, snapshot) => (
-                <div
-                  {...provided.droppableProps}
-                  ref={provided.innerRef}
-                  style={getListStyle(snapshot.isDraggingOver)}
-                >
-                  {roomData.pickBanOrder.map((item, index) => (
-                    <Draggable
-                      key={index}
-                      draggableId={index.toString()}
-                      index={index}
-                    >
-                      {(provided, snapshot) => (
-                        <div
-                          ref={provided.innerRef}
-                          {...provided.draggableProps}
-                          {...provided.dragHandleProps}
-                          style={getItemStyle(
-                            snapshot.isDragging,
-                            provided.draggableProps.style
-                          )}
-                        >
-                          {item === "ban" ? "Ban" : "Pick"}
-                        </div>
-                      )}
-                    </Draggable>
-                  ))}
-                  {provided.placeholder}
-                </div>
-              )}
-            </Droppable>
-          </DragDropContext>
+          <div className="basis-1/3 flex flex-col gap-4">
+            <button
+              type="button"
+              className="w-full bg-red-500 text-primary rounded-md py-2 hover:bg-secondary/80 transition-colors"
+              onClick={onBanClick}
+            >
+              Ban
+            </button>
+            <button
+              type="button"
+              className="w-full bg-blue-500 text-primary rounded-md py-2 hover:bg-secondary/80 transition-colors"
+              onClick={onPickClick}
+            >
+              Pick
+            </button>
+
+            <button
+              type="button"
+              className="w-full bg-transparent text-primary rounded-md py-2 border border-primary"
+              onClick={onClearClick}
+            >
+              Clear
+            </button>
+          </div>
+          <div className="basis-2/3 grid grid-cols-4 gap-2 border border-primary rounded-md p-4">
+            {roomData.pickBanOrder.map((item, index) => (
+              <div
+                key={index}
+                className={`w-full h-fit text-primary text-sm p-2 rounded-md bg-${
+                  item === "ban" ? "red" : "blue"
+                }-500`}
+              >
+                {index + 1}. {item === "ban" ? "Ban" : "Pick"}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 
@@ -162,6 +126,113 @@ export function CreateForm() {
       >
         Create Room
       </button>
+
+      <div className="flex flex-col gap-4 mt-4">
+        {/* Team A */}
+        <div className="w-full flex gap-4 items-center">
+          <Link
+            href="https://hsr-banpick-app.vercel.app/uuid/teamA"
+            className="max-w-[200px] truncate text-primary text-sm p-2"
+          >
+            TeamA: https://hsr-banpick-app.vercel.app/uuid/teamA
+          </Link>
+
+          <Image
+            src="/icons/copy.png"
+            alt="copy"
+            width={24}
+            height={24}
+            className="cursor-pointer"
+            onClick={() =>
+              copy("https://hsr-banpick-app.vercel.app/uuid/teamA")
+            }
+          />
+
+          <Image
+            src="/icons/redirect.png"
+            alt="redirect"
+            width={24}
+            height={24}
+            className="cursor-pointer"
+            onClick={() =>
+              window.open(
+                "https://hsr-banpick-app.vercel.app/uuid/teamA",
+                "_blank"
+              )
+            }
+          />
+        </div>
+
+        {/* Team B */}
+        <div className="w-full flex gap-4 items-center">
+          <Link
+            href="https://hsr-banpick-app.vercel.app/uuid/teamB"
+            className="max-w-[200px] truncate text-primary text-sm p-2"
+          >
+            TeamB: https://hsr-banpick-app.vercel.app/uuid/teamB
+          </Link>
+
+          <Image
+            src="/icons/copy.png"
+            alt="copy"
+            width={24}
+            height={24}
+            className="cursor-pointer"
+            onClick={() =>
+              copy("https://hsr-banpick-app.vercel.app/uuid/teamB")
+            }
+          />
+
+          <Image
+            src="/icons/redirect.png"
+            alt="redirect"
+            width={24}
+            height={24}
+            className="cursor-pointer"
+            onClick={() =>
+              window.open(
+                "https://hsr-banpick-app.vercel.app/uuid/teamB",
+                "_blank"
+              )
+            }
+          />
+        </div>
+
+        {/* Audience */}
+        <div className="w-full flex gap-4 items-center">
+          <Link
+            href="https://hsr-banpick-app.vercel.app/uuid/audience"
+            className="max-w-[200px] truncate text-primary text-sm p-2"
+          >
+            Audience: https://hsr-banpick-app.vercel.app/uuid/audience
+          </Link>
+
+          <Image
+            src="/icons/copy.png"
+            alt="copy"
+            width={24}
+            height={24}
+            className="cursor-pointer"
+            onClick={() =>
+              copy("https://hsr-banpick-app.vercel.app/uuid/audience")
+            }
+          />
+
+          <Image
+            src="/icons/redirect.png"
+            alt="redirect"
+            width={24}
+            height={24}
+            className="cursor-pointer"
+            onClick={() =>
+              window.open(
+                "https://hsr-banpick-app.vercel.app/uuid/audience",
+                "_blank"
+              )
+            }
+          />
+        </div>
+      </div>
     </form>
   );
 }

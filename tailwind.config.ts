@@ -14,6 +14,16 @@ export default {
         secondary: "var(--secondary)",
         primary: "var(--primary)",
       },
+      animation: {
+        fadeOut: "fadeOut 5s ease-in-out",
+      },
+      keyframes: {
+        fadeOut: {
+          "0%": { opacity: "1" },
+          "50%": { opacity: "1" },
+          "100%": { opacity: "0" },
+        },
+      },
     },
   },
   plugins: [],

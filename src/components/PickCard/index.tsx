@@ -4,25 +4,35 @@ import { useMemo } from "react";
 
 interface PickCardProps {
   name: string;
+  isCurrentTurn: boolean;
+  selectedCharacter?: string;
 }
 
-export default function PickCard({ name }: PickCardProps) {
+export default function PickCard({
+  name,
+  isCurrentTurn,
+  selectedCharacter,
+}: PickCardProps) {
   const character = useMemo(() => {
-    if (!name) return null;
+    const char = isCurrentTurn && selectedCharacter ? selectedCharacter : name;
+
     return characters.find(
-      (character) => character.name.toLowerCase() === name.toLowerCase()
+      (character) => character.name.toLowerCase() === char.toLowerCase()
     );
-  }, [name]);
+  }, [name, selectedCharacter, isCurrentTurn]);
 
   return (
-    <div className="w-full h-[120px] bg-[#1c1c1c] border border-[#272727] rounded flex items-center justify-between">
+    <div className="relative w-full h-[120px] bg-[#1c1c1c] border border-[#272727] rounded flex items-center justify-between">
       <Image
         src={character ? character.avatar : "/icons/ticket.png"}
         alt={character ? character.name : "Ticket"}
         className="h-full w-auto"
-        width={100}
-        height={100}
+        width={256}
+        height={256}
       />
+      {isCurrentTurn && (
+        <div className="absolute inset-0 rounded-lg border-2 border-primary animate-pulse pointer-events-none" />
+      )}
     </div>
   );
 }

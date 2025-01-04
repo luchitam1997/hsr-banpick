@@ -1,19 +1,25 @@
 import { DESTINIES } from "@/constants/destinies";
+import { Character } from "@/hooks/types";
 import characters from "@/resources/characters.json";
-import { useMemo, useState } from "react";
+import Image from "next/image";
+import { useEffect, useMemo, useState } from "react";
 
-interface Character {
-  id: number;
-  name: string;
-  element: string;
-  destiny: string;
-  rarity: number;
-  image: string;
-  avatar: string;
+interface SelectCharacterProps {
+  readOnly: boolean;
+  onSelect?: (character: Character) => void;
+  onConfirm?: () => void;
+  selectedCharacter: string;
+  disabledCharacters: string[];
 }
 
-export function SelectCharacter() {
-  const [selectedChar, setSelectedChar] = useState<Character>();
+export function SelectCharacter({
+  readOnly,
+  onSelect,
+  onConfirm,
+  selectedCharacter,
+  disabledCharacters,
+}: SelectCharacterProps) {
+  const [showSelectedCharacter, setShowSelectedCharacter] = useState(false);
   const [filter, setFilter] = useState<{
     destiny?: string;
     name?: string;
@@ -23,11 +29,8 @@ export function SelectCharacter() {
   });
 
   const handleSelectChar = (character: Character) => {
-    setSelectedChar(character);
-
-    setTimeout(() => {
-      setSelectedChar(undefined);
-    }, 2000);
+    if (readOnly || !onSelect) return;
+    onSelect(character);
   };
 
   const handleFilterDestiny = (destiny: string) => {
@@ -59,6 +62,28 @@ export function SelectCharacter() {
     });
   }, [filter.destiny, filter.name]);
 
+  const currentCharacter = useMemo(() => {
+    return characters.find((character) => character.name === selectedCharacter);
+  }, [selectedCharacter]);
+
+  const isDisabled = (character: Character) => {
+    return disabledCharacters.includes(character.name);
+  };
+
+  useEffect(() => {
+    if (currentCharacter) {
+      setShowSelectedCharacter(true);
+    }
+
+    const timeout = setTimeout(() => {
+      setShowSelectedCharacter(false);
+    }, 5000);
+
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [currentCharacter]);
+
   return (
     <div className="basis-1/2">
       {/* Characters list */}
@@ -71,9 +96,11 @@ export function SelectCharacter() {
                 filter.destiny === destiny.slug && "border-b-2 border-secondary"
               }`}
             >
-              <img
+              <Image
                 src={destiny.icon}
                 alt={destiny.name}
+                width={256}
+                height={256}
                 className={`w-12 h-12 cursor-pointer hover:opacity-50 `}
                 onClick={() => handleFilterDestiny(destiny.slug)}
               />
@@ -88,18 +115,30 @@ export function SelectCharacter() {
             className="w-full h-full bg-transparent text-primary outline-none"
             onChange={(e) => handleFilterName(e.target.value)}
           />
-          <img src="/icons/search.png" className="w-6 h-6" />
+          <Image
+            src="/icons/search.png"
+            alt="search"
+            width={24}
+            height={24}
+            className="w-6 h-6"
+          />
         </div>
       </div>
       <div className="w-full bg-[#1c1c1c] border border-[#272727] rounded p-4 mt-4 ">
         {filteredCharacters.length > 0 ? (
           <div className="w-full grid grid-cols-8 gap-2">
             {filteredCharacters.map((character, index) => (
-              <img
+              <Image
+                width={100}
+                height={100}
                 key={index}
                 src={character.avatar}
                 alt={character.name}
-                className="cursor-pointer hover:opacity-50"
+                className={`  ${
+                  isDisabled(character)
+                    ? "grayscale cursor-not-allowed"
+                    : "cursor-pointer hover:opacity-50"
+                }`}
                 onClick={() => handleSelectChar(character)}
               />
             ))}
@@ -109,18 +148,28 @@ export function SelectCharacter() {
         )}
       </div>
 
-      <div className="w-full flex items-center justify-center mt-10">
-        <button className="w-1/2 h-[40px] bg-[#1c1c1c] border border-[#272727] text-primary rounded hover:bg-[#272727]">
-          Select
-        </button>
-      </div>
+      {onConfirm && (
+        <div className="w-full flex items-center justify-center mt-10">
+          <button
+            className={`w-1/2 h-[40px] bg-[#1c1c1c] border border-[#272727] text-primary rounded hover:bg-[#272727] ${
+              readOnly ? "opacity-50 cursor-not-allowed" : ""
+            }`}
+            onClick={onConfirm}
+            disabled={readOnly}
+          >
+            Select
+          </button>
+        </div>
+      )}
 
-      {selectedChar && (
-        <div className="w-full h-full bg-black absolute top-0 left-0 z-50 bg-opacity-50 flex items-center justify-center">
-          <img
-            src={selectedChar.image}
-            alt={selectedChar.name}
+      {showSelectedCharacter && currentCharacter && (
+        <div className="w-full h-full bg-black absolute top-0 left-0 z-50 bg-opacity-50 flex items-center justify-center animate-fadeOut">
+          <Image
+            src={currentCharacter.image}
+            alt={currentCharacter.name}
             className="h-full w-auto"
+            width={1000}
+            height={1000}
           />
         </div>
       )}

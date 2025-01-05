@@ -41,6 +41,7 @@ export interface RoomData {
   teams: Team[];
   order: SelectType[];
   turn: Turn;
+  winner?: "blue" | "red";
 }
 
 export interface Character {

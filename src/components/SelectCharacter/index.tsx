@@ -1,25 +1,38 @@
 import { DESTINIES } from "@/constants/destinies";
-import { Character } from "@/hooks/types";
+import { Character, RoomStatus, Turn } from "@/hooks/types";
 import characters from "@/resources/characters.json";
 import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
+import { EndGameModal } from "../EndGameModal";
 
 interface SelectCharacterProps {
   readOnly: boolean;
   onSelect?: (character: Character) => void;
   onConfirm?: () => void;
+  onEndGame?: (team: "blue" | "red") => void;
   selectedCharacter: string;
   disabledCharacters: string[];
+  status?: RoomStatus;
+  orders?: string[];
+  turn?: Turn;
+  isShowSelectedCharacter?: boolean;
 }
 
 export function SelectCharacter({
   readOnly,
   onSelect,
   onConfirm,
+  onEndGame,
   selectedCharacter,
   disabledCharacters,
+  status,
+  orders,
+  turn,
+  isShowSelectedCharacter = false,
 }: SelectCharacterProps) {
   const [showSelectedCharacter, setShowSelectedCharacter] = useState(false);
+  const [showEndGame, setShowEndGame] = useState(false);
+
   const [filter, setFilter] = useState<{
     destiny?: string;
     name?: string;
@@ -71,7 +84,7 @@ export function SelectCharacter({
   };
 
   useEffect(() => {
-    if (currentCharacter) {
+    if (currentCharacter && isShowSelectedCharacter) {
       setShowSelectedCharacter(true);
     }
 
@@ -82,7 +95,22 @@ export function SelectCharacter({
     return () => {
       clearTimeout(timeout);
     };
-  }, [currentCharacter]);
+  }, [currentCharacter, isShowSelectedCharacter]);
+
+  const openEndGameModal = () => {
+    setShowEndGame(true);
+  };
+
+  const handleEndGame = (team: "blue" | "red") => {
+    setShowEndGame(false);
+    if (onEndGame) {
+      onEndGame(team);
+    }
+  };
+
+  const closeEndGameModal = () => {
+    setShowEndGame(false);
+  };
 
   return (
     <div className="basis-1/2">
@@ -148,8 +176,25 @@ export function SelectCharacter({
         )}
       </div>
 
-      {onConfirm && (
-        <div className="w-full flex items-center justify-center mt-10">
+      {orders && orders.length > 0 && (
+        <div className="w-full mt-4 flex items-center justify-center gap-2">
+          {orders.map((order, index) => (
+            <span
+              key={index}
+              className={`p-3 text-primary rounded-full ${
+                order === "pick" ? "bg-blue-500" : "bg-red-500"
+              } ${turn?.currentRound === index ? "animate-pulse" : ""} ${
+                order === "ban" ? "translate-y-full" : ""
+              }`}
+            >
+              {order === "pick" ? "Pick" : "Ban"}
+            </span>
+          ))}
+        </div>
+      )}
+
+      {status === RoomStatus.SELECTING && onConfirm && (
+        <div className="w-full flex items-center justify-center mt-20">
           <button
             className={`w-1/2 h-[40px] bg-[#1c1c1c] border border-[#272727] text-primary rounded hover:bg-[#272727] ${
               readOnly ? "opacity-50 cursor-not-allowed" : ""
@@ -158,6 +203,17 @@ export function SelectCharacter({
             disabled={readOnly}
           >
             Select
+          </button>
+        </div>
+      )}
+
+      {status === RoomStatus.PLAYING && onEndGame && (
+        <div className="w-full flex items-center justify-center mt-20">
+          <button
+            className="w-1/2 h-[40px] bg-[#1c1c1c] border border-[#272727] text-primary rounded hover:bg-[#272727]"
+            onClick={openEndGameModal}
+          >
+            End Game
           </button>
         </div>
       )}
@@ -172,6 +228,10 @@ export function SelectCharacter({
             height={1000}
           />
         </div>
+      )}
+
+      {showEndGame && (
+        <EndGameModal onClose={closeEndGameModal} onWin={handleEndGame} />
       )}
     </div>
   );

@@ -2,12 +2,13 @@ import { TeamColumn } from "@/components/TeamColumn";
 import { SelectCharacter } from "@/components/SelectCharacter";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { database } from "@/configs/firebase";
+import { database, firestore } from "@/configs/firebase";
 import { ref, onValue, set } from "firebase/database";
 import { useRouter } from "next/router";
 import WaitingScreen from "@/components/WaitingScreen";
 import { RoomData, RoomStatus } from "@/hooks/types";
 import Head from "next/head";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 
 export default function AudiencePage() {
   const router = useRouter();
@@ -91,6 +92,54 @@ export default function AudiencePage() {
     return () => clearInterval(timer);
   }, [roomData, countdown]);
 
+  const handleEndGame = async (team: "blue" | "red") => {
+    if (!roomData) return;
+
+    const updatedRoom: RoomData = {
+      ...roomData,
+      status: RoomStatus.FINISHED,
+      winner: team,
+    };
+
+    // Get all picks and bans from both teams
+    const teamAPicks = roomData.teams[0].picks;
+    const teamABans = roomData.teams[0].bans;
+    const teamBPicks = roomData.teams[1].picks;
+    const teamBBans = roomData.teams[1].bans;
+
+    // Reference to the single history document
+    const historyRef = doc(firestore, "history", "game-history");
+    const historyDoc = await getDoc(historyRef);
+
+    // Get existing data or create initial structure
+    const existingData = historyDoc.exists()
+      ? historyDoc.data()
+      : {
+          picks: [],
+          bans: [],
+          wons: [],
+          totalGames: 0,
+        };
+
+    // Append new game data to existing arrays
+    const updatedHistory = {
+      picks: [...existingData.picks, ...teamAPicks, ...teamBPicks],
+      bans: [...existingData.bans, ...teamABans, ...teamBBans],
+      wons: [
+        ...existingData.wons,
+        ...(team === "blue" ? teamAPicks : teamBPicks),
+      ],
+      totalGames: existingData.totalGames + 1,
+      updatedAt: Math.floor(Date.now() / 1000),
+    };
+
+    // Save to Firestore
+    await setDoc(historyRef, updatedHistory);
+
+    // Update room status
+    await set(roomRef, updatedRoom);
+  };
+
   return (
     <main className="w-full h-full p-5">
       <Head>
@@ -113,6 +162,11 @@ export default function AudiencePage() {
           readOnly={true}
           selectedCharacter={selectedCharacter}
           disabledCharacters={disabledCharacters}
+          status={roomData?.status}
+          onEndGame={handleEndGame}
+          isShowSelectedCharacter={true}
+          orders={roomData?.order}
+          turn={currentTurn}
         />
 
         {/* Team B */}

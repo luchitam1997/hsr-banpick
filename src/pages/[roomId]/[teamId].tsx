@@ -217,6 +217,9 @@ export default function TeamPage() {
           onConfirm={handleConfirm}
           selectedCharacter={selectedCharacter}
           disabledCharacters={disabledCharacters}
+          status={roomData?.status}
+          orders={roomData?.order}
+          turn={currentTurn}
         />
 
         {/* Team B */}

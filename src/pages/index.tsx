@@ -7,7 +7,7 @@ export default function Home() {
       <Head>
         <title>HSR: All stars competition</title>
       </Head>
-      <div className="flex flex-col items-center justify-center gap-4">
+      <div className="w-full max-w-2xl flex flex-col items-center justify-center gap-4">
         <h1 className="text-2xl font-bold text-primary">
           Welcome to Honkai Star Rail All Stars Championship
         </h1>

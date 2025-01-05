@@ -110,8 +110,8 @@ export function CreateForm() {
   }, [roomId]);
 
   return (
-    <div>
-      <form onSubmit={onSubmit} className="w-full max-w-lg space-y-4">
+    <div className="w-full max-w-2xl">
+      <form onSubmit={onSubmit} className="w-full space-y-4">
         <div>
           <Input
             label="Room Name"

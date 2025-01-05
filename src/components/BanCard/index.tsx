@@ -35,7 +35,16 @@ export default function BanCard({
       {isCurrentTurn && (
         <div className="absolute inset-0 rounded-lg border-2 border-primary animate-pulse pointer-events-none" />
       )}
-      {/* <img src="/icons/ban.png" className="absolute bottom-0" /> */}
+
+      {character && (
+        <Image
+          src="/icons/ban.png"
+          alt="Ban"
+          className="absolute w-20 h-auto top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+          width={512}
+          height={512}
+        />
+      )}
     </div>
   );
 }

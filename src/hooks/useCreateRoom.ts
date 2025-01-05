@@ -1,6 +1,12 @@
 import { ref, set, push } from "firebase/database";
 import { database } from "@/configs/firebase";
-import { CreateRoomParams, RoomData, RoomStatus, SelectType } from "./types";
+import {
+  CreateRoomParams,
+  Order,
+  RoomData,
+  RoomStatus,
+  SelectType,
+} from "./types";
 
 export const useCreateRoom = () => {
   const createRoom = async (roomData: CreateRoomParams) => {
@@ -17,12 +23,18 @@ export const useCreateRoom = () => {
       const teamAId = newTeamARef.key;
       const teamBId = newTeamBRef.key;
 
-      const pickAmount = roomData.pickBanOrder.filter(
-        (item: SelectType) => item === SelectType.PICK
-      ).length;
-      const banAmount = roomData.pickBanOrder.filter(
-        (item: SelectType) => item === SelectType.BAN
-      ).length;
+      let bluePick = 0;
+      let blueBan = 0;
+      let redPick = 0;
+      let redBan = 0;
+
+      roomData.pickBanOrder.forEach((item: Order) => {
+        if (item.team === "blue") {
+          item.order === SelectType.PICK ? bluePick++ : blueBan++;
+        } else {
+          item.order === SelectType.PICK ? redPick++ : redBan++;
+        }
+      });
 
       const initialRoomData: RoomData = {
         id: roomId || "",
@@ -33,16 +45,16 @@ export const useCreateRoom = () => {
           {
             id: teamAId || "",
             name: roomData.teamA,
-            bans: new Array(banAmount).fill(""),
-            picks: new Array(pickAmount).fill(""),
-            timeRemaining: 15 * 60, // 15 minutes
+            bans: new Array(blueBan).fill(""),
+            picks: new Array(bluePick).fill(""),
+            timeRemaining: roomData.timeRemaining,
           },
           {
             id: teamBId || "",
             name: roomData.teamB,
-            bans: new Array(banAmount).fill(""),
-            picks: new Array(pickAmount).fill(""),
-            timeRemaining: 15 * 60, // 15 minutes
+            bans: new Array(redBan).fill(""),
+            picks: new Array(redPick).fill(""),
+            timeRemaining: roomData.timeRemaining,
           },
         ],
 
@@ -51,7 +63,7 @@ export const useCreateRoom = () => {
           currentPlayer: "",
           currentRound: 0,
           currentCharacter: "",
-          currentSelect: "",
+          currentSelect: null,
         },
       };
 

@@ -6,7 +6,7 @@ import Image from "next/image";
 import { ref, set, get } from "firebase/database";
 import { database } from "@/configs/firebase";
 import { useCreateRoom } from "@/hooks/useCreateRoom";
-import { RoomData, RoomStatus, SelectType } from "@/hooks/types";
+import { Order, RoomData, RoomStatus, SelectType } from "@/hooks/types";
 import { CreateRoomParams } from "@/hooks/types";
 
 export function CreateForm() {
@@ -15,7 +15,8 @@ export function CreateForm() {
     teamA: "",
     teamB: "",
     status: RoomStatus.WAITING,
-    pickBanOrder: [] as SelectType[],
+    pickBanOrder: [] as Order[],
+    timeRemaining: 0,
   });
 
   const [roomId, setRoomId] = useState("");
@@ -71,17 +72,10 @@ export function CreateForm() {
     setRoomData({ ...roomData, [e.target.name]: e.target.value });
   };
 
-  const onBanClick = () => {
+  const onSelectOrder = (order: Order) => {
     setRoomData({
       ...roomData,
-      pickBanOrder: [...roomData.pickBanOrder, SelectType.BAN],
-    });
-  };
-
-  const onPickClick = () => {
-    setRoomData({
-      ...roomData,
-      pickBanOrder: [...roomData.pickBanOrder, SelectType.PICK],
+      pickBanOrder: [...roomData.pickBanOrder, order],
     });
   };
 
@@ -125,7 +119,7 @@ export function CreateForm() {
         <div className="grid grid-cols-2 gap-4">
           <div>
             <Input
-              label="Team A"
+              label="Blue Team"
               onChange={handleChange}
               name="teamA"
               value={roomData.teamA}
@@ -135,7 +129,7 @@ export function CreateForm() {
 
           <div>
             <Input
-              label="Team B"
+              label="Red Team"
               onChange={handleChange}
               name="teamB"
               value={roomData.teamB}
@@ -144,27 +138,62 @@ export function CreateForm() {
           </div>
         </div>
 
+        <div>
+          <Input
+            label="Time Remaining"
+            onChange={handleChange}
+            name="timeRemaining"
+            value={roomData.timeRemaining}
+            placeholder="Enter time remaining (seconds)"
+          />
+        </div>
+
         <div className="space-y-2">
           <label className="block text-base font-medium text-primary">
             Build Pick/Ban Order
           </label>
           <div className="flex gap-4">
             <div className="basis-1/3 flex flex-col gap-4">
-              <button
-                type="button"
-                className="w-full bg-red-500 text-primary rounded-md py-2 hover:bg-secondary/80 transition-colors"
-                onClick={onBanClick}
-              >
-                Ban
-              </button>
-              <button
-                type="button"
-                className="w-full bg-blue-500 text-primary rounded-md py-2 hover:bg-secondary/80 transition-colors"
-                onClick={onPickClick}
-              >
-                Pick
-              </button>
-
+              <div className="grid grid-cols-2 gap-2">
+                <button
+                  type="button"
+                  className="w-full bg-blue-500 text-primary rounded-md py-2 hover:bg-secondary/80 transition-colors"
+                  onClick={() =>
+                    onSelectOrder({ team: "blue", order: SelectType.BAN })
+                  }
+                >
+                  Ban
+                </button>
+                <button
+                  type="button"
+                  className="w-full bg-blue-500 text-primary rounded-md py-2 hover:bg-secondary/80 transition-colors"
+                  onClick={() =>
+                    onSelectOrder({ team: "blue", order: SelectType.PICK })
+                  }
+                >
+                  Pick
+                </button>
+              </div>
+              <div className="grid grid-cols-2 gap-2">
+                <button
+                  type="button"
+                  className="w-full bg-red-500 text-primary rounded-md py-2 hover:bg-secondary/80 transition-colors"
+                  onClick={() =>
+                    onSelectOrder({ team: "red", order: SelectType.BAN })
+                  }
+                >
+                  Ban
+                </button>
+                <button
+                  type="button"
+                  className="w-full bg-red-500 text-primary rounded-md py-2 hover:bg-secondary/80 transition-colors"
+                  onClick={() =>
+                    onSelectOrder({ team: "red", order: SelectType.PICK })
+                  }
+                >
+                  Pick
+                </button>
+              </div>
               <button
                 type="button"
                 className="w-full bg-transparent text-primary rounded-md py-2 border border-primary"
@@ -178,10 +207,10 @@ export function CreateForm() {
                 <div
                   key={index}
                   className={`w-full h-fit text-primary text-sm p-2 rounded-md bg-${
-                    item === "ban" ? "red" : "blue"
+                    item.team === "red" ? "red" : "blue"
                   }-500`}
                 >
-                  {index + 1}. {item === "ban" ? "Ban" : "Pick"}
+                  {index + 1}. {item.order === SelectType.BAN ? "Ban" : "Pick"}
                 </div>
               ))}
             </div>

@@ -1,5 +1,5 @@
 import { DESTINIES } from "@/constants/destinies";
-import { Character, RoomStatus, Turn } from "@/hooks/types";
+import { Character, Order, RoomStatus, SelectType, Turn } from "@/hooks/types";
 import characters from "@/resources/characters.json";
 import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
@@ -13,7 +13,7 @@ interface SelectCharacterProps {
   selectedCharacter: string;
   disabledCharacters: string[];
   status?: RoomStatus;
-  orders?: string[];
+  orders?: Order[];
   turn?: Turn;
   isShowSelectedCharacter?: boolean;
 }
@@ -182,12 +182,12 @@ export function SelectCharacter({
             <span
               key={index}
               className={`p-3 text-primary rounded-full ${
-                order === "pick" ? "bg-blue-500" : "bg-red-500"
+                order.team === "blue" ? "bg-blue-500" : "bg-red-500"
               } ${turn?.currentRound === index ? "animate-pulse" : ""} ${
-                order === "ban" ? "translate-y-full" : ""
+                order.team === "red" ? "translate-y-full" : ""
               }`}
             >
-              {order === "pick" ? "Pick" : "Ban"}
+              {order.order === SelectType.PICK ? "Pick" : "Ban"}
             </span>
           ))}
         </div>

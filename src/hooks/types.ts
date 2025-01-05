@@ -3,7 +3,8 @@ export interface CreateRoomParams {
   teamA: string;
   teamB: string;
   status: RoomStatus;
-  pickBanOrder: SelectType[];
+  timeRemaining: number;
+  pickBanOrder: Order[];
 }
 
 export enum RoomStatus {
@@ -30,7 +31,12 @@ export interface Turn {
   currentPlayer: string;
   currentRound: number;
   currentCharacter: string;
-  currentSelect: string;
+  currentSelect: Order | null;
+}
+
+export interface Order {
+  team: "blue" | "red";
+  order: SelectType;
 }
 
 export interface RoomData {
@@ -39,7 +45,7 @@ export interface RoomData {
   createdAt: number;
   status: RoomStatus;
   teams: Team[];
-  order: SelectType[];
+  order: Order[];
   turn: Turn;
   winner?: "blue" | "red";
 }

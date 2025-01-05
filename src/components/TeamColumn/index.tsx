@@ -17,15 +17,17 @@ export function TeamColumn({ team, data, turn }: TeamColumnProps) {
 
   const isActive = (index: number, type: SelectType) => {
     if (!turn) return false;
-    const isCurrentTeam = turn.currentPlayer === data.id;
     const indexActive =
       type === SelectType.PICK
         ? data.picks.findIndex((item) => !item)
         : data.bans.findIndex((item) => !item);
 
-    return (
-      isCurrentTeam && turn.currentSelect === type && indexActive === index
-    );
+    const isActive =
+      turn.currentSelect?.order === type &&
+      turn.currentSelect?.team === team &&
+      indexActive === index;
+    console.log("isActive", isActive);
+    return isActive;
   };
 
   const selectedCharacter = useMemo(() => {

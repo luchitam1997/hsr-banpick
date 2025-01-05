@@ -47,10 +47,6 @@ export default function TeamPage() {
     return roomData?.turn.currentPlayer === teamId;
   }, [roomData, teamId]);
 
-  const teamIndex = useMemo(() => {
-    return roomData?.teams.findIndex((team) => team.id === teamId);
-  }, [roomData, teamId]);
-
   const currentTurn = useMemo(() => {
     return roomData?.turn;
   }, [roomData]);
@@ -95,9 +91,7 @@ export default function TeamPage() {
     if (!roomData) return;
 
     // Check if this is the last pick/ban
-    const isLastTurn =
-      roomData.turn.currentRound === roomData.order.length - 1 &&
-      teamIndex === 1;
+    const isLastTurn = roomData.turn.currentRound === roomData.order.length - 1;
 
     const currentTeam = roomData.teams.find(
       (team) => team.id === roomData.turn.currentPlayer
@@ -107,7 +101,7 @@ export default function TeamPage() {
 
     const currentType = roomData.order[roomData.turn.currentRound];
 
-    if (currentType === SelectType.PICK) {
+    if (currentType.order === SelectType.PICK) {
       for (let i = 0; i < currentTeam.picks.length; i++) {
         if (!currentTeam.picks[i]) {
           currentTeam.picks[i] = roomData.turn.currentCharacter;
@@ -123,22 +117,19 @@ export default function TeamPage() {
       }
     }
 
-    const nextRound =
-      teamIndex === 0 || isLastTurn
-        ? roomData.turn.currentRound
-        : roomData.turn.currentRound + 1;
+    const nextRound = isLastTurn
+      ? roomData.turn.currentRound
+      : roomData.turn.currentRound + 1;
 
     const nextSelect = roomData.order[nextRound];
 
     const nextPlayer =
-      roomData.turn.currentPlayer === roomData.teams[0].id
-        ? roomData.teams[1].id
-        : roomData.teams[0].id;
+      nextSelect.team === "blue" ? roomData.teams[0].id : roomData.teams[1].id;
 
     // next turn
     const nextTurn: Turn = isLastTurn
       ? {
-          currentSelect: "",
+          currentSelect: null,
           currentCharacter: "",
           currentRound: 0,
           currentPlayer: "",

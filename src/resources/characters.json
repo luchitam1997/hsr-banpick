@@ -178,5 +178,410 @@
     "rarity": 4,
     "image": "https://webstatic.hoyoverse.com/upload/op-public/2023/08/25/118ffff853e10702075622ec965b544d_1507744005339764670.png",
     "avatar": "https://webstatic.hoyoverse.com/upload/op-public/2023/08/25/6a04865a1bb5ead132ae0634d9db19cf_4031096838282238632.png"
+  },
+  {
+    "id": 21,
+    "name": "Aglaea",
+    "element": "lightning",
+    "destiny": "remembrance",
+    "rarity": 5,
+    "image": "https://fastcdn.hoyoverse.com/content-v2/hkrpg/127763/ca6a9c38fe3f0eb31c9089ad163535ba_6949694277734712926.png",
+    "avatar": "https://fastcdn.hoyoverse.com/content-v2/hkrpg/127763/3d432f16bc9f62880645f2d7b32f10e9_5330989358654276731.png"
+  },
+  {
+    "id": 22,
+    "name": "Jing Yuan",
+    "element": "lightning",
+    "destiny": "erudition",
+    "rarity": 5,
+    "image": "https://fastcdn.hoyoverse.com/content-v2/hkrpg/102897/4e927c6508410d94a04dbc2851a563ad_2904528864219172941.png",
+    "avatar": "https://webstatic.hoyoverse.com/upload/op-public/2022/09/30/06627c3ed9a434b06bb3e1f1da2bd607_5225424279399336630.png"
+  },
+  {
+    "id": 23,
+    "name": "Yanqing",
+    "element": "ice",
+    "destiny": "the-hunt",
+    "rarity": 5,
+    "image": "https://webstatic.hoyoverse.com/upload/op-public/2023/01/20/dcb229bd54aa60f46ff59c820a659d06_2761071804868520413.png",
+    "avatar": "https://webstatic.hoyoverse.com/upload/op-public/2022/10/08/229166830cf5fe65b32e5609dbdac843_2869902963996593922.png"
+  },
+  {
+    "id": 24,
+    "name": "Bailu",
+    "element": "lightning",
+    "destiny": "abundance",
+    "rarity": 5,
+    "image": "https://webstatic.hoyoverse.com/upload/op-public/2022/10/08/2be6b106dd7fa511429b0938f2bf9cf2_7175154911551827498.png",
+    "avatar": "https://webstatic.hoyoverse.com/upload/op-public/2022/10/08/17e202ede9319aea9646f2b3283fc6e4_5565591624018155295.png"
+  },
+  {
+    "id": 25,
+    "name": "Luocha",
+    "element": "imaginary",
+    "destiny": "abundance",
+    "rarity": 5,
+    "image": "https://webstatic.hoyoverse.com/upload/op-public/2023/06/07/0a74af3a5de053e2f70461f6271c244f_5949978262369597010.png",
+    "avatar": "https://webstatic.hoyoverse.com/upload/op-public/2023/07/18/5679a7d5758a4d4dbc9f1c76632464cb_3648109906516862740.png"
+  },
+  {
+    "id": 26,
+    "name": "Tingyun",
+    "element": "lightning",
+    "destiny": "harmony",
+    "rarity": 4,
+    "image": "https://fastcdn.hoyoverse.com/content-v2/hkrpg/102941/e077d01842f6da9ce5d8d0fad21bd61a_6365222730641852882.png",
+    "avatar": "https://webstatic.hoyoverse.com/upload/op-public/2022/09/21/abc477a5a40607670f276d9cb3d2aa36_5514182949656602376.png"
+  },
+  {
+    "id": 27,
+    "name": "Sushang",
+    "element": "physical",
+    "destiny": "the-hunt",
+    "rarity": 4,
+    "image": "https://webstatic.hoyoverse.com/upload/op-public/2022/09/21/b0568a7ea363ffc97f809abc18f2ebc4_479248282264027939.png",
+    "avatar": "https://webstatic.hoyoverse.com/upload/op-public/2022/09/21/8d2b9654f45b89d0603ef0b513b9a566_1227713074735578189.png"
+  },
+  {
+    "id": 28,
+    "name": "Qingque",
+    "element": "quantum",
+    "destiny": "erudition",
+    "rarity": 4,
+    "image": "https://webstatic.hoyoverse.com/upload/op-public/2022/09/22/b5ccbfb9bc01b7ede81071295b36876a_2411319474955646235.png",
+    "avatar": "https://webstatic.hoyoverse.com/upload/op-public/2022/09/22/d3092c9c346158321957e64e256396b5_2856882698748546148.png"
+  },
+  {
+    "id": 29,
+    "name": "Yukong",
+    "element": "imaginary",
+    "destiny": "harmony",
+    "rarity": 4,
+    "image": "https://webstatic.hoyoverse.com/upload/op-public/2023/06/07/d040f33fe706f7607e6aedbc0bc367c2_6707736116754422994.png",
+    "avatar": "https://webstatic.hoyoverse.com/upload/op-public/2023/07/18/0fd66fbfbf4b9ca498ee94751f5b570e_2105314868323755254.png"
+  },
+  {
+    "id": 30,
+    "name": "Den Heng - IL",
+    "element": "imaginary",
+    "destiny": "destruction",
+    "rarity": 5,
+    "image": "https://fastcdn.hoyoverse.com/content-v2/hkrpg/112751/354f8490f3e1f514425d9496d5c76506_8916209661216232601.png",
+    "avatar": "https://webstatic.hoyoverse.com/upload/op-public/2023/08/28/2852d52efb77373b978387f9af220352_4301603772431899426.png"
+  },
+  {
+    "id": 31,
+    "name": "Fu Xuan",
+    "element": "quantum",
+    "destiny": "preservation",
+    "rarity": 5,
+    "image": "https://webstatic.hoyoverse.com/upload/op-public/2023/08/28/35f7231fce35b5f4ca665551f5523291_8032624353710342790.png",
+    "avatar": "https://webstatic.hoyoverse.com/upload/op-public/2023/08/28/5be1b41597872563d85668d9ac9280a2_7948403521063359384.png"
+  },
+  {
+    "id": 32,
+    "name": "Jingliu",
+    "element": "ice",
+    "destiny": "destruction",
+    "rarity": 5,
+    "image": "https://fastcdn.hoyoverse.com/content-v2/hkrpg/113257/908bbf00b100be952a54bdffeeefab84_332743845557554874.png",
+    "avatar": "https://fastcdn.hoyoverse.com/content-v2/hkrpg/113257/c8ea8aa80f1bf8733355d6d883b7dc5a_4528230065299218550.png"
+  },
+  {
+    "id": 33,
+    "name": "Guinaifen",
+    "element": "fire",
+    "destiny": "nihility",
+    "rarity": 4,
+    "image": "https://fastcdn.hoyoverse.com/content-v2/hkrpg/113258/e265f04f50a42923eff451553f35edca_7443067970997484804.png",
+    "avatar": "https://fastcdn.hoyoverse.com/content-v2/hkrpg/113258/3f0977ec2c08f32cae6571ed9c68a627_1347565453922773062.png"
+  },
+  {
+    "id": 34,
+    "name": "Huohuo",
+    "element": "wind",
+    "destiny": "abundance",
+    "rarity": 5,
+    "image": "https://fastcdn.hoyoverse.com/content-v2/hkrpg/113549/750f02527721ee6d47d39d7f18d41490_3729511778385396642.png",
+    "avatar": "https://fastcdn.hoyoverse.com/content-v2/hkrpg/113549/a716bd8ea1eb70d43ff182b28682e2de_5240979789104297080.png"
+  },
+  {
+    "id": 35,
+    "name": "Hanya",
+    "element": "physical",
+    "destiny": "harmony",
+    "rarity": 4,
+    "image": "https://fastcdn.hoyoverse.com/content-v2/hkrpg/113552/fcc6b1c1fb57aaed1af0e6ee6d03f4d4_6203013314848329231.png",
+    "avatar": "https://fastcdn.hoyoverse.com/content-v2/hkrpg/113552/b29bbde3c7b1f4468a7637013bb4a26b_9067928989500952398.png"
+  },
+  {
+    "id": 36,
+    "name": "Xueyi",
+    "element": "quantum",
+    "destiny": "destruction",
+    "rarity": 4,
+    "image": "https://fastcdn.hoyoverse.com/content-v2/hkrpg/114135/a693c40586ddff8cf67c135c0e107abc_3285448773095602266.png",
+    "avatar": "https://fastcdn.hoyoverse.com/content-v2/hkrpg/114135/600946b1e25c6f413f6fece889057ae9_4143645551008551162.png"
+  },
+  {
+    "id": 37,
+    "name": "Yunli",
+    "element": "physical",
+    "destiny": "destruction",
+    "rarity": 5,
+    "image": "https://fastcdn.hoyoverse.com/content-v2/hkrpg/124839/e9ada73956acf24172f96f6967ba708a_2762937485877625001.png",
+    "avatar": "https://fastcdn.hoyoverse.com/content-v2/hkrpg/124839/e12a8edb9935382495a6655a494202ee_8590733781558095505.png"
+  },
+  {
+    "id": 38,
+    "name": "Jiaoqiu",
+    "element": "fire",
+    "destiny": "nihility",
+    "rarity": 5,
+    "image": "https://fastcdn.hoyoverse.com/content-v2/hkrpg/124840/d761fb65a9320aeae48aa5136f0399a3_3588801508296255748.png",
+    "avatar": "https://fastcdn.hoyoverse.com/content-v2/hkrpg/124840/d0a71a631d13ee45eee02cffc6192369_5189353121014928192.png"
+  },
+  {
+    "id": 39,
+    "name": "Feixiao",
+    "element": "wind",
+    "destiny": "the-hunt",
+    "rarity": 5,
+    "image": "https://fastcdn.hoyoverse.com/content-v2/hkrpg/125609/7d59520ad1ce7d0b741f1fa06ff201b4_3486332773273258063.png",
+    "avatar": "https://fastcdn.hoyoverse.com/content-v2/hkrpg/125609/0604e974e01079ff28aefb9a36034a2c_5441037249016844156.png"
+  },
+  {
+    "id": 40,
+    "name": "Lingsha",
+    "element": "fire",
+    "destiny": "abundance",
+    "rarity": 5,
+    "image": "https://fastcdn.hoyoverse.com/content-v2/hkrpg/125610/919a9d47f033fde37dd6aae36e77aa72_8633682211537180049.png",
+    "avatar": "https://fastcdn.hoyoverse.com/content-v2/hkrpg/125610/935f8a2d6330aa15adb40f98ae68a735_3242128634664307084.png"
+  },
+  {
+    "id": 41,
+    "name": "Moze",
+    "element": "lightning",
+    "destiny": "the-hunt",
+    "rarity": 4,
+    "image": "https://fastcdn.hoyoverse.com/content-v2/hkrpg/125611/131584e6d8dc00bb8fa105287a796911_9052775288226532543.png",
+    "avatar": "https://fastcdn.hoyoverse.com/content-v2/hkrpg/125611/7bb418a3e0dac37d34092966301acfb5_5454382468253364130.png"
+  },
+  {
+    "id": 42,
+    "name": "Fugue",
+    "element": "fire",
+    "destiny": "nihility",
+    "rarity": 5,
+    "image": "https://fastcdn.hoyoverse.com/content-v2/hkrpg/127090/6ad02135678255fee6d4a6afc4475bb4_4853133216752168331.png",
+    "avatar": "https://fastcdn.hoyoverse.com/content-v2/hkrpg/127090/cde8013714d48170f1a28e9401289dcf_790224459929927148.png"
+  },
+  {
+    "id": 43,
+    "name": "Topaz",
+    "element": "fire",
+    "destiny": "the-hunt",
+    "rarity": 5,
+    "image": "https://fastcdn.hoyoverse.com/content-v2/hkrpg/113259/1f4c58c005cb69fabbfab5f9bf27528b_4950641849561908675.png",
+    "avatar": "https://fastcdn.hoyoverse.com/content-v2/hkrpg/113259/32438d68f132ca08cee5ac2d9e7bcd2c_5632765198824540990.png"
+  },
+  {
+    "id": 44,
+    "name": "Adventurine",
+    "element": "imaginary",
+    "destiny": "preservation",
+    "rarity": 5,
+    "image": "https://fastcdn.hoyoverse.com/content-v2/hkrpg/122838/33abec9872f8262c0b2b27b4be338dec_9114403366592711642.png",
+    "avatar": "https://fastcdn.hoyoverse.com/content-v2/hkrpg/122838/3951d1cfe25f83ce0dbccfc1e9179f38_8791635192165709278.png"
+  },
+  {
+    "id": 45,
+    "name": "Jade",
+    "element": "quantum",
+    "destiny": "erudition",
+    "rarity": 5,
+    "image": "https://fastcdn.hoyoverse.com/content-v2/hkrpg/123958/b1e9a9d4efbbccb46bd095be875020f0_3784598354647810193.png",
+    "avatar": "https://fastcdn.hoyoverse.com/content-v2/hkrpg/123958/5ac8230fb2e00c50b85efbc47af48072_3696522042636246501.png"
+  },
+  {
+    "id": 46,
+    "name": "Misha",
+    "element": "ice",
+    "destiny": "destruction",
+    "rarity": 4,
+    "image": "https://fastcdn.hoyoverse.com/content-v2/hkrpg/122125/08710b009d03d0a5ff07fc7852bd97b0_3199717051974458867.png",
+    "avatar": "https://fastcdn.hoyoverse.com/content-v2/hkrpg/122125/46a07c2e258a669abd85f6914ab2617d_6011740925924449263.png"
+  },
+  {
+    "id": 47,
+    "name": "Gallagher",
+    "element": "fire",
+    "destiny": "abundance",
+    "rarity": 4,
+    "image": "https://fastcdn.hoyoverse.com/content-v2/hkrpg/122839/bf2d6aa2f975e68aea5e7aef4e4d8443_2041577274411802799.png",
+    "avatar": "https://fastcdn.hoyoverse.com/content-v2/hkrpg/122839/af86a10d64d57f4fe827753daab5d2ef_5757651548611497324.png"
+  },
+  {
+    "id": 48,
+    "name": "Robin",
+    "element": "physical",
+    "destiny": "harmony",
+    "rarity": 5,
+    "image": "https://fastcdn.hoyoverse.com/content-v2/hkrpg/123309/3f80dfa726771a7d4d20055b574476db_879451039983639304.png",
+    "avatar": "https://fastcdn.hoyoverse.com/content-v2/hkrpg/123309/b62c590ac7a08dbcb56dc0e501779d44_3507602144959829598.png"
+  },
+  {
+    "id": 49,
+    "name": "Argenti",
+    "element": "physical",
+    "destiny": "erudition",
+    "rarity": 5,
+    "image": "https://fastcdn.hoyoverse.com/content-v2/hkrpg/113551/63035d487b44cebe8558d5571dd7576f_4875317288796837882.png",
+    "avatar": "https://fastcdn.hoyoverse.com/content-v2/hkrpg/113551/db61f7e468824e7a27c1374591ca59f2_8253493838975128264.png"
+  },
+  {
+    "id": 50,
+    "name": "Dr. Ratio",
+    "element": "imaginary",
+    "destiny": "the-hunt",
+    "rarity": 5,
+    "image": "https://fastcdn.hoyoverse.com/content-v2/hkrpg/114134/73415b6e6625f7d7fa3bcf6c93db7ba0_1694223275280494114.png",
+    "avatar": "https://fastcdn.hoyoverse.com/content-v2/hkrpg/114134/dff9186a3fca6ae3667c823c117faf19_7442485835931115291.png"
+  },
+  {
+    "id": 51,
+    "name": "Acheron",
+    "element": "lightning",
+    "destiny": "nihility",
+    "rarity": 5,
+    "image": "https://fastcdn.hoyoverse.com/content-v2/hkrpg/122837/f1949a97d8e2a4c552ce72dae91d113b_5679129076399762427.png",
+    "avatar": "https://fastcdn.hoyoverse.com/content-v2/hkrpg/122837/6dd8141676b1aa499a4456aee3870212_1635765427851919463.png"
+  },
+  {
+    "id": 52,
+    "name": "Black Swan",
+    "element": "wind",
+    "destiny": "nihility",
+    "rarity": 5,
+    "image": "https://fastcdn.hoyoverse.com/content-v2/hkrpg/122114/d006c4e640e1136555030566fdbab632_600959861979807524.png",
+    "avatar": "https://fastcdn.hoyoverse.com/content-v2/hkrpg/122114/edf63f652678812e83d1c6df2be75daf_6129955511652481057.png"
+  },
+  {
+    "id": 53,
+    "name": "Sparkle",
+    "element": "quantum",
+    "destiny": "harmony",
+    "rarity": 5,
+    "image": "https://fastcdn.hoyoverse.com/content-v2/hkrpg/122124/84bd682c90a39b3c6901849af41908ea_7056823722039367369.png",
+    "avatar": "https://fastcdn.hoyoverse.com/content-v2/hkrpg/122124/128f664cebd2126da8d9adca6aefaee1_5523393521416091287.png"
+  },
+  {
+    "id": 54,
+    "name": "Boothill",
+    "element": "physical",
+    "destiny": "the-hunt",
+    "rarity": 5,
+    "image": "https://fastcdn.hoyoverse.com/content-v2/hkrpg/123310/987e35beb1de73f49a43aec52c20e718_9026844028397525791.png",
+    "avatar": "https://fastcdn.hoyoverse.com/content-v2/hkrpg/123310/8944287625894decc7dada516476699b_6346927405924196056.png"
+  },
+  {
+    "id": 55,
+    "name": "Rappa",
+    "element": "imaginary",
+    "destiny": "erudition",
+    "rarity": 5,
+    "image": "https://fastcdn.hoyoverse.com/content-v2/hkrpg/126410/8dfbb558c8eb7ab5649af43f314551dd_3522704563058855760.png",
+    "avatar": "https://fastcdn.hoyoverse.com/content-v2/hkrpg/126410/ea5172790a0384b136c2e59d507148cb_4871560916384880148.png"
+  },
+  {
+    "id": 56,
+    "name": "Sunday",
+    "element": "imaginary",
+    "destiny": "harmony",
+    "rarity": 5,
+    "image": "https://fastcdn.hoyoverse.com/content-v2/hkrpg/127020/67b14db668381cfc99ae18a9448f29c8_3077738248715718306.png",
+    "avatar": "https://fastcdn.hoyoverse.com/content-v2/hkrpg/127020/c582d91e7bdb00dbc781f0bd41b653cb_1076010626284160793.png"
+  },
+  {
+    "id": 57,
+    "name": "Arlan",
+    "element": "lightning",
+    "destiny": "destruction",
+    "rarity": 4,
+    "image": "https://webstatic.hoyoverse.com/upload/op-public/2022/04/11/a8098196feb50f9806d5d8e598dcaa88_4820633268333798789.png",
+    "avatar": "https://webstatic.hoyoverse.com/upload/op-public/2022/04/11/fcd256b0f99517789c82f9a2c70b0b49_2383793506230310336.png"
+  },
+  {
+    "id": 58,
+    "name": "Asta",
+    "element": "fire",
+    "destiny": "harmony",
+    "rarity": 4,
+    "image": "https://webstatic.hoyoverse.com/upload/op-public/2022/04/11/73a394088aa6410e9cf8df60865d8c9e_8169697015918873399.png",
+    "avatar": "https://webstatic.hoyoverse.com/upload/op-public/2022/04/11/41ffdfc9d4330534da7931c91573bc76_8172180063275619079.png"
+  },
+  {
+    "id": 59,
+    "name": "Herta",
+    "element": "ice",
+    "destiny": "erudition",
+    "rarity": 4,
+    "image": "https://webstatic.hoyoverse.com/upload/op-public/2022/04/11/6f2bb7c621fb703f9980c0536b3682c3_5168275529275139328.png",
+    "avatar": "https://webstatic.hoyoverse.com/upload/op-public/2022/04/11/4637f36b2026279317cdb61c196f7a81_9116875698966877594.png"
+  },
+  {
+    "id": 60,
+    "name": "The Herta",
+    "element": "ice",
+    "destiny": "erudition",
+    "rarity": 5,
+    "image": "https://fastcdn.hoyoverse.com/content-v2/hkrpg/127762/4c697923486d3a260e40b890577ffe25_4699942433086130853.png",
+    "avatar": "https://fastcdn.hoyoverse.com/content-v2/hkrpg/127762/41b1a2050f736816e323ba06936e556b_8445223751054886090.png"
+  },
+  {
+    "id": 61,
+    "name": "Ruan Mei",
+    "element": "ice",
+    "destiny": "harmony",
+    "rarity": 5,
+    "image": "https://fastcdn.hoyoverse.com/content-v2/hkrpg/114133/0bcb035d5597762ad6503419e39d7056_4527755776815943472.png",
+    "avatar": "https://fastcdn.hoyoverse.com/content-v2/hkrpg/114133/36299f11d5e5f555c012416fd6042010_3853002908709342369.png"
+  },
+  {
+    "id": 62,
+    "name": "Trailblazer - Destruction",
+    "element": "physical",
+    "destiny": "destruction",
+    "rarity": 5,
+    "image": "https://static.wikia.nocookie.net/houkai-star-rail/images/6/6f/Character_Trailblazer_%28F%29_Destruction_Splash_Art.png/revision/latest/scale-to-width-down/1000?cb=20230501005741",
+    "avatar": "https://static.wikia.nocookie.net/houkai-star-rail/images/6/65/Character_Stelle_%28Destruction%29_Icon.png/revision/latest?cb=20250122233405"
+  },
+  {
+    "id": 63,
+    "name": "Trailblazer - Preservation",
+    "element": "fire",
+    "destiny": "preservation",
+    "rarity": 5,
+    "image": "https://static.wikia.nocookie.net/houkai-star-rail/images/1/17/Character_Trailblazer_%28F%29_Preservation_Splash_Art.png/revision/latest/scale-to-width-down/1000?cb=20230501005729",
+    "avatar": "https://static.wikia.nocookie.net/houkai-star-rail/images/4/44/Character_Stelle_%28Preservation%29_Icon.png/revision/latest?cb=20250122233414"
+  },
+  {
+    "id": 64,
+    "name": "Trailblazer - Harmony",
+    "element": "imaginary",
+    "destiny": "harmony",
+    "rarity": 5,
+    "image": "https://static.wikia.nocookie.net/houkai-star-rail/images/0/0a/Character_Trailblazer_%28F%29_Harmony_Splash_Art.png/revision/latest/scale-to-width-down/1000?cb=20240508064117",
+    "avatar": "https://static.wikia.nocookie.net/houkai-star-rail/images/7/7b/Character_Stelle_%28Harmony%29_Icon.png/revision/latest?cb=20240515221732"
+  },
+  {
+    "id": 65,
+    "name": "Trailblazer - Remembrance",
+    "element": "ice",
+    "destiny": "remembrance",
+    "rarity": 5,
+    "image": "https://static.wikia.nocookie.net/houkai-star-rail/images/1/15/Character_Trailblazer_%28F%29_Remembrance_Splash_Art.png/revision/latest/scale-to-width-down/1000?cb=20250117063309",
+    "avatar": "https://static.wikia.nocookie.net/houkai-star-rail/images/a/a3/Character_Stelle_%28Remembrance%29_Icon.png/revision/latest?cb=20250101123300"
   }
 ]

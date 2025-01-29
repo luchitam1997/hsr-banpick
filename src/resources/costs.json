@@ -1,0 +1,392 @@
+[
+  {
+    "id": 1,
+    "name": "Firefly",
+    "costs": [6, 8.5, null, null, null, null, null],
+    "weapon": 1.5
+  },
+  {
+    "id": 2,
+    "name": "Kafka",
+    "costs": [3, 5.5, null, null, null, null, null],
+    "weapon": 1
+  },
+  {
+    "id": 3,
+    "name": "Silver Wolf",
+    "costs": [3, 4.5, null, null, null, null, null],
+    "weapon": 1.5
+  },
+  {
+    "id": 4,
+    "name": "Blade",
+    "costs": [3, 4, null, null, null, null, null],
+    "weapon": 1.5
+  },
+  {
+    "id": 5,
+    "name": "Himeko",
+    "costs": [2, 2.5, 3, 3, 3.5, null, null],
+    "weapon": 0
+  },
+  {
+    "id": 6,
+    "name": "Welt",
+    "costs": [1.5, 1.5, 2, 2, 2.5, null, null],
+    "weapon": 1.5
+  },
+  {
+    "id": 7,
+    "name": "Dan Heng",
+    "costs": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
+    "weapon": 0
+  },
+  {
+    "id": 8,
+    "name": "March 7th (Preservation)",
+    "costs": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
+    "weapon": 0
+  },
+  {
+    "id": 9,
+    "name": "March 7th (The Hunt)",
+    "costs": [3.5, 3.5, 3.5, 3.5, 3.5, 3.5, 3.5],
+    "weapon": 0
+  },
+  {
+    "id": 10,
+    "name": "Gepard",
+    "costs": [1, 1, 1, 1, 1.5, null, null],
+    "weapon": 0
+  },
+  {
+    "id": 11,
+    "name": "Bronya",
+    "costs": [3.5, 4, 4.5, 4.5, 5.5, null, null],
+    "weapon": 0
+  },
+  {
+    "id": 12,
+    "name": "Seele",
+    "costs": [5, 5.5, null, null, null, null, null],
+    "weapon": 1
+  },
+  {
+    "id": 13,
+    "name": "Clara",
+    "costs": [2.5, 3, 3.5, 3.5, 4, null, null],
+    "weapon": 0
+  },
+  {
+    "id": 14,
+    "name": "Sampo",
+    "costs": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
+    "weapon": 0
+  },
+  {
+    "id": 15,
+    "name": "Pela",
+    "costs": [3, 3, 3, 3, 3, 3, 3],
+    "weapon": 0
+  },
+  {
+    "id": 16,
+    "name": "Serval",
+    "costs": [2, 2, 2, 2, 2, 2, 2],
+    "weapon": 0
+  },
+  {
+    "id": 17,
+    "name": "Natasha",
+    "costs": [1, 1, 1, 1, 1, 1, 1],
+    "weapon": 0
+  },
+  {
+    "id": 18,
+    "name": "Hook",
+    "costs": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
+    "weapon": 0
+  },
+  {
+    "id": 19,
+    "name": "Luka",
+    "costs": [2, 2, 2, 2, 2, 2, 2],
+    "weapon": 0
+  },
+  {
+    "id": 20,
+    "name": "Lynx",
+    "costs": [1, 1, 1, 1, 1, 1, 1],
+    "weapon": 0
+  },
+  {
+    "id": 21,
+    "name": "Aglaea",
+    "costs": [7.5, 11.5, null, null, null, null, null],
+    "weapon": 2
+  },
+  {
+    "id": 22,
+    "name": "Jing Yuan",
+    "costs": [3.5, 4.5, null, null, null, null, null],
+    "weapon": 1
+  },
+  {
+    "id": 23,
+    "name": "Yanqing",
+    "costs": [1.5, 1.5, 2, 2, 3.5, null, null],
+    "weapon": 0
+  },
+  {
+    "id": 24,
+    "name": "Bailu",
+    "costs": [1, 1, 1, 1, 1.5, null, null],
+    "weapon": 0
+  },
+  {
+    "id": 25,
+    "name": "Luocha",
+    "costs": [1.5, 2, null, null, null, null, null],
+    "weapon": 0.5
+  },
+  {
+    "id": 26,
+    "name": "Tingyun",
+    "costs": [3.5, 3.5, 3.5, 3.5, 3.5, 3.5, 3.5],
+    "weapon": 0
+  },
+  {
+    "id": 27,
+    "name": "Sushang",
+    "costs": [2, 2, 2, 2, 2, 2, 2],
+    "weapon": 0
+  },
+  {
+    "id": 28,
+    "name": "Qingque",
+    "costs": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
+    "weapon": 0
+  },
+  {
+    "id": 29,
+    "name": "Yukong",
+    "costs": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5],
+    "weapon": 0
+  },
+  {
+    "id": 30,
+    "name": "Den Heng - IL",
+    "costs": [4, 5, null, null, null, null, null],
+    "weapon": 1
+  },
+  {
+    "id": 31,
+    "name": "Fu Xuan",
+    "costs": [1.5, 3, null, null, null, null, null],
+    "weapon": 0.5
+  },
+  {
+    "id": 32,
+    "name": "Jingliu",
+    "costs": [2, 7, null, null, null, null, null],
+    "weapon": 1.5
+  },
+  {
+    "id": 33,
+    "name": "Guinaifen",
+    "costs": [2, 2, 2, 2, 2, 2, 2],
+    "weapon": 0
+  },
+  {
+    "id": 34,
+    "name": "Huohuo",
+    "costs": [2.5, 4, null, null, null, null, null],
+    "weapon": 0.5
+  },
+  {
+    "id": 35,
+    "name": "Hanya",
+    "costs": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5],
+    "weapon": 0
+  },
+  {
+    "id": 36,
+    "name": "Xueyi",
+    "costs": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
+    "weapon": 0
+  },
+  {
+    "id": 37,
+    "name": "Yunli",
+    "costs": [5, 9.5, null, null, null, null, null],
+    "weapon": 2
+  },
+  {
+    "id": 38,
+    "name": "Jiaoqiu",
+    "costs": [3.5, 5.5, null, null, null, null, null],
+    "weapon": 2
+  },
+  {
+    "id": 39,
+    "name": "Feixiao",
+    "costs": [5.5, 9.5, null, null, null, null, null],
+    "weapon": 2
+  },
+  {
+    "id": 40,
+    "name": "Lingsha",
+    "costs": [3.5, 7.5, null, null, null, null, null],
+    "weapon": 2
+  },
+  {
+    "id": 41,
+    "name": "Moze",
+    "costs": [3, 3, 3, 3, 3, 3, 3],
+    "weapon": 0
+  },
+  {
+    "id": 42,
+    "name": "Fugue",
+    "costs": [4.5, 9.5, null, null, null, null, null],
+    "weapon": 1.5
+  },
+  {
+    "id": 43,
+    "name": "Topaz",
+    "costs": [3, 5, null, null, null, null, null],
+    "weapon": 1.5
+  },
+  {
+    "id": 44,
+    "name": "Adventurine",
+    "costs": [2.5, 3, null, null, null, null, null],
+    "weapon": 1.5
+  },
+  {
+    "id": 45,
+    "name": "Jade",
+    "costs": [2.5, 5, null, null, null, null, null],
+    "weapon": 1.5
+  },
+  {
+    "id": 46,
+    "name": "Misha",
+    "costs": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
+    "weapon": 0
+  },
+  {
+    "id": 47,
+    "name": "Gallagher",
+    "costs": [2, 2, 2, 2, 2, 2, 2],
+    "weapon": 0
+  },
+  {
+    "id": 48,
+    "name": "Robin",
+    "costs": [5, 9, null, null, null, null, null],
+    "weapon": 1.5
+  },
+  {
+    "id": 49,
+    "name": "Argenti",
+    "costs": [3.5, 5, null, null, null, null, null],
+    "weapon": 1
+  },
+  {
+    "id": 50,
+    "name": "Dr. Ratio",
+    "costs": [5, 6.5, null, null, null, null, null],
+    "weapon": 2
+  },
+  {
+    "id": 51,
+    "name": "Acheron",
+    "costs": [4.5, 6, null, null, null, null, null],
+    "weapon": 2
+  },
+  {
+    "id": 52,
+    "name": "Black Swan",
+    "costs": [3, 7, null, null, null, null, null],
+    "weapon": 1
+  },
+  {
+    "id": 53,
+    "name": "Sparkle",
+    "costs": [3.5, 4.5, null, null, null, null, null],
+    "weapon": 1
+  },
+  {
+    "id": 54,
+    "name": "Boothill",
+    "costs": [5.5, 8, null, null, null, null, null],
+    "weapon": 2
+  },
+  {
+    "id": 55,
+    "name": "Rappa",
+    "costs": [5, 7.5, null, null, null, null, null],
+    "weapon": 2
+  },
+  {
+    "id": 56,
+    "name": "Sunday",
+    "costs": [4, 7, null, null, null, null, null],
+    "weapon": 2
+  },
+  {
+    "id": 57,
+    "name": "Arlan",
+    "costs": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
+    "weapon": 0
+  },
+  {
+    "id": 58,
+    "name": "Asta",
+    "costs": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5],
+    "weapon": 0
+  },
+  {
+    "id": 59,
+    "name": "Herta",
+    "costs": [2, 2, 2, 2, 2, 2, 2],
+    "weapon": 0
+  },
+  {
+    "id": 60,
+    "name": "The Herta",
+    "costs": [7.5, 10.5, null, null, null, null, null],
+    "weapon": 2
+  },
+  {
+    "id": 61,
+    "name": "Ruan Mei",
+    "costs": [5, 7.5, null, null, null, null, null],
+    "weapon": 1.5
+  },
+  {
+    "id": 62,
+    "name": "Trailblazer - Destruction",
+    "costs": [2, 2, 2, 2, 2, 2, 2],
+    "weapon": 0
+  },
+  {
+    "id": 63,
+    "name": "Trailblazer - Preservation",
+    "costs": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
+    "weapon": 0
+  },
+  {
+    "id": 64,
+    "name": "Trailblazer - Harmony",
+    "costs": [4.5, 4.5, 4.5, 4.5, 4.5, 4.5, 4.5],
+    "weapon": 0
+  },
+  {
+    "id": 65,
+    "name": "Trailblazer - Remembrance",
+    "costs": [4, 4, 4, 4, 4, 4, 4],
+    "weapon": 0
+  }
+]

@@ -1,14 +1,23 @@
 import { DESTINIES } from '@/constants/destinies'
-import { Character, Order, RoomStatus, SelectType, Turn } from '@/hooks/types'
+import {
+  Character,
+  CharacterSelect,
+  Order,
+  RoomStatus,
+  SelectType,
+  Turn,
+} from '@/hooks/types'
 import characters from '@/resources/characters.json'
 import Image from 'next/image'
 import { useEffect, useMemo, useState } from 'react'
 import { EndGameModal } from '../EndGameModal'
+import { SelectCharacterDetails } from '../SelectCharacterDetails'
 
 interface SelectCharacterProps {
   readOnly: boolean
   onSelect?: (character: Character) => void
-  onConfirm?: () => void
+  onConfirmPick?: (params: CharacterSelect) => void
+  onConfirmBan?: () => void
   onEndGame?: (team: 'blue' | 'red') => void
   selectedCharacter: string
   disabledCharacters: string[]
@@ -21,7 +30,8 @@ interface SelectCharacterProps {
 export function SelectCharacter({
   readOnly,
   onSelect,
-  onConfirm,
+  onConfirmPick,
+  onConfirmBan,
   onEndGame,
   selectedCharacter,
   disabledCharacters,
@@ -32,7 +42,7 @@ export function SelectCharacter({
 }: SelectCharacterProps) {
   const [showSelectedCharacter, setShowSelectedCharacter] = useState(false)
   const [showEndGame, setShowEndGame] = useState(false)
-
+  const [showDetails, setShowDetails] = useState(false)
   const [filter, setFilter] = useState<{
     destiny?: string
     name?: string
@@ -44,6 +54,19 @@ export function SelectCharacter({
   const handleSelectChar = (character: Character) => {
     if (readOnly || !onSelect) return
     onSelect(character)
+
+    if (
+      orders &&
+      orders.length > 0 &&
+      turn?.currentRound &&
+      orders[turn?.currentRound].order === SelectType.PICK
+    ) {
+      setShowDetails(true)
+    }
+  }
+
+  const handleCloseDetails = () => {
+    setShowDetails(false)
   }
 
   const handleFilterDestiny = (destiny: string) => {
@@ -201,16 +224,16 @@ export function SelectCharacter({
         </div>
       )}
 
-      {status === RoomStatus.SELECTING && onConfirm && (
+      {status === RoomStatus.SELECTING_CHARACTER && onConfirmBan && (
         <div className='w-full flex items-center justify-center mt-20'>
           <button
             className={`w-1/2 h-[40px] bg-[#1c1c1c] border border-[#272727] text-primary rounded hover:bg-[#272727] ${
               readOnly ? 'opacity-50 cursor-not-allowed' : ''
             }`}
-            onClick={onConfirm}
+            onClick={onConfirmBan}
             disabled={readOnly}
           >
-            Select
+            Ban
           </button>
         </div>
       )}
@@ -242,6 +265,14 @@ export function SelectCharacter({
         <EndGameModal
           onClose={closeEndGameModal}
           onWin={handleEndGame}
+        />
+      )}
+
+      {showDetails && onConfirmPick && (
+        <SelectCharacterDetails
+          selectedCharacter={selectedCharacter}
+          onClose={handleCloseDetails}
+          onConfirm={onConfirmPick}
         />
       )}
     </div>

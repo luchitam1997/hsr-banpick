@@ -1,5 +1,5 @@
-import { ref, set, push } from 'firebase/database'
-import { database } from '@/configs/firebase'
+import { ref, set, push } from "firebase/database";
+import { database } from "@/configs/firebase";
 import {
   CharacterSelect,
   CreateRoomParams,
@@ -7,53 +7,50 @@ import {
   RoomData,
   RoomStatus,
   SelectType,
-} from './types'
+} from "./types";
 
 export const useCreateRoom = () => {
   const createRoom = async (roomData: CreateRoomParams) => {
     try {
-      const roomRef = ref(database, 'rooms')
-      const newRoomRef = push(roomRef)
-      const roomId = newRoomRef.key
-      const teamARef = ref(database, `rooms/${roomId}/teams/0`)
-      const teamBRef = ref(database, `rooms/${roomId}/teams/1`)
+      const roomRef = ref(database, "rooms");
+      const newRoomRef = push(roomRef);
+      const roomId = newRoomRef.key;
+      const teamARef = ref(database, `rooms/${roomId}/teams/0`);
+      const teamBRef = ref(database, `rooms/${roomId}/teams/1`);
 
-      const newTeamARef = push(teamARef)
-      const newTeamBRef = push(teamBRef)
+      const newTeamARef = push(teamARef);
+      const newTeamBRef = push(teamBRef);
 
-      const teamAId = newTeamARef.key
-      const teamBId = newTeamBRef.key
+      const teamAId = newTeamARef.key;
+      const teamBId = newTeamBRef.key;
 
-      let bluePick = 0
-      let blueBan = 0
-      let redPick = 0
-      let redBan = 0
+      let bluePick = 0;
+      let blueBan = 0;
+      let redPick = 0;
+      let redBan = 0;
 
       roomData.pickBanOrder.forEach((item: Order) => {
-        if (item.team === 'blue') {
-          item.order === SelectType.PICK ? bluePick++ : blueBan++
+        if (item.team === "blue") {
+          item.order === SelectType.PICK ? bluePick++ : blueBan++;
         } else {
-          item.order === SelectType.PICK ? redPick++ : redBan++
+          item.order === SelectType.PICK ? redPick++ : redBan++;
         }
-      })
+      });
 
       const initialRoomData: RoomData = {
-        id: roomId || '',
+        id: roomId || "",
         name: roomData.name,
         createdAt: Math.floor(Date.now() / 1000),
         status: RoomStatus.WAITING, // Room is waiting for players
         teams: [
           {
-            id: teamAId || '',
+            id: teamAId || "",
             name: roomData.teamA,
-            node: null,
-            dice: null,
-            selectPriority: null,
-            bans: new Array(blueBan).fill(''),
+            bans: new Array(blueBan).fill(""),
             picks: new Array(bluePick).fill({
-              character: '',
+              character: "",
               relic: 0,
-              weapon: '',
+              weapon: "",
               weaponLevel: 0,
               point: 0,
             }) as CharacterSelect[],
@@ -62,16 +59,13 @@ export const useCreateRoom = () => {
             cycle: 0,
           },
           {
-            id: teamBId || '',
+            id: teamBId || "",
             name: roomData.teamB,
-            node: null,
-            dice: null,
-            selectPriority: null,
-            bans: new Array(redBan).fill(''),
+            bans: new Array(redBan).fill(""),
             picks: new Array(redPick).fill({
-              character: '',
+              character: "",
               relic: 0,
-              weapon: '',
+              weapon: "",
               weaponLevel: 0,
               point: 0,
             }) as CharacterSelect[],
@@ -83,24 +77,24 @@ export const useCreateRoom = () => {
 
         order: roomData.pickBanOrder,
         turn: {
-          currentPlayer: '',
+          currentPlayer: "",
           currentRound: 0,
-          currentCharacter: '',
+          currentCharacter: "",
           currentSelect: null,
         },
-      }
+      };
 
-      console.log(initialRoomData)
+      console.log(initialRoomData);
 
-      await set(newRoomRef, initialRoomData)
+      await set(newRoomRef, initialRoomData);
       if (roomId && teamAId && teamBId) {
-        return { roomId, teamAId, teamBId }
+        return { roomId, teamAId, teamBId };
       }
     } catch (error) {
-      console.error('Error creating room:', error)
-      throw error
+      console.error("Error creating room:", error);
+      throw error;
     }
-  }
+  };
 
-  return { createRoom }
-}
+  return { createRoom };
+};

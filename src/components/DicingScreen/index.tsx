@@ -1,40 +1,28 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
-import { motion } from 'framer-motion'
+import Dice from "react-dice-roll";
 
-export const DicingScreen = () => {
-  const [diceNumber, setDiceNumber] = useState(1)
-  const [rolling, setRolling] = useState(false)
+interface DicingScreenProps {
+  onRoll: (value: 1 | 2 | 3 | 4 | 5 | 6) => void;
+  value?: 1 | 2 | 3 | 4 | 5 | 6;
+}
 
-  const rollDice = () => {
-    setRolling(true)
-    const newNumber = Math.floor(Math.random() * 6) + 1
-    setTimeout(() => {
-      setDiceNumber(newNumber)
-      setRolling(false)
-      //   onRoll(newNumber % 2 === 0 ? 'Team B' : 'Team A')
-    }, 1000)
-  }
+export const DicingScreen = ({ onRoll, value }: DicingScreenProps) => {
+  const rollDice = (value: 1 | 2 | 3 | 4 | 5 | 6) => {
+    onRoll(value);
+  };
 
   return (
-    <div className='fixed w-screen h-screen inset-0 flex items-center justify-center bg-black/50'>
-      <div className='flex flex-col items-center'>
-        <motion.div
-          animate={{ rotate: rolling ? 360 : 0 }}
-          transition={{ duration: 1 }}
-          className='text-6xl'
-        >
-          🎲 {diceNumber}
-        </motion.div>
-        <button
-          className='mt-4 px-4 py-2 bg-green-500 text-white rounded'
-          onClick={rollDice}
-          disabled={rolling}
-        >
-          Roll
-        </button>
+    <div className="fixed w-screen h-screen inset-0 flex items-center justify-center bg-black/50">
+      <div className="flex flex-col items-center perspective-[1000px]">
+        <Dice
+          size={100}
+          onRoll={rollDice}
+          rollingTime={500}
+          disabled={value !== undefined}
+          defaultValue={value}
+        />
       </div>
     </div>
-  )
-}
+  );
+};

@@ -79,6 +79,7 @@ export const SelectCharacterDetails = ({
       weaponLevel,
       point: totalPoint,
     })
+    onClose()
   }
 
   return (
@@ -106,7 +107,14 @@ export const SelectCharacterDetails = ({
               >
                 {characterCost?.costs.map(
                   (cost, index) =>
-                    cost && <option value={index}>{romanNumber(index)}</option>
+                    cost && (
+                      <option
+                        value={index}
+                        key={index}
+                      >
+                        {romanNumber(index)}
+                      </option>
+                    )
                 )}
               </select>
             </div>
@@ -138,12 +146,16 @@ export const SelectCharacterDetails = ({
                       <option
                         value={index + 1}
                         disabled={cost === null}
+                        key={index}
                       >
                         {romanNumber(index + 1)}
                       </option>
                     ))
-                  : weaponStandardCosts.map((cost, index) => (
-                      <option value={index + 1}>
+                  : weaponStandardCosts.map((_, index) => (
+                      <option
+                        value={index + 1}
+                        key={index}
+                      >
                         {romanNumber(index + 1)}
                       </option>
                     ))}

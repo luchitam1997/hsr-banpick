@@ -1,0 +1,22 @@
+[
+  {
+    "id": "11.1",
+    "name": "Deer",
+    "image": "https://static.wikia.nocookie.net/houkai-star-rail/images/a/a8/Enemy_Abundant_Ebon_Deer.png/revision/latest/scale-to-width-down/1000?cb=20230501074504"
+  },
+  {
+    "id": "11.2",
+    "name": "Svarog",
+    "image": "https://static.wikia.nocookie.net/houkai-star-rail/images/d/d5/Enemy_Svarog.png/revision/latest/scale-to-width-down/1000?cb=20230501074730"
+  },
+  {
+    "id": "12.1",
+    "name": "Banacademic Office",
+    "image": "https://static.wikia.nocookie.net/houkai-star-rail/images/8/81/Enemy_Wonder_Forest%27s_Banacademic_Office_Staff.png/revision/latest/scale-to-width-down/1000?cb=20241023021052"
+  },
+  {
+    "id": "12.2",
+    "name": "Sam",
+    "image": "https://static.wikia.nocookie.net/houkai-star-rail/images/3/38/Enemy_Stellaron_Hunter_Sam.png/revision/latest/scale-to-width-down/1000?cb=20240206014134"
+  }
+]

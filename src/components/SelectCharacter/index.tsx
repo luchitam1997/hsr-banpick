@@ -5,6 +5,7 @@ import {
   Order,
   RoomStatus,
   SelectType,
+  Team,
   Turn,
 } from '@/hooks/types'
 import characters from '@/resources/characters.json'
@@ -18,13 +19,14 @@ interface SelectCharacterProps {
   onSelect?: (character: Character) => void
   onConfirmPick?: (params: CharacterSelect) => void
   onConfirmBan?: () => void
-  onEndGame?: (team: 'blue' | 'red') => void
+  onEndGame?: (teams: Team[]) => void
   selectedCharacter: string
   disabledCharacters: string[]
   status?: RoomStatus
   orders?: Order[]
   turn?: Turn
   isShowSelectedCharacter?: boolean
+  teams?: Team[]
 }
 
 export function SelectCharacter({
@@ -38,6 +40,7 @@ export function SelectCharacter({
   status,
   orders,
   turn,
+  teams,
   isShowSelectedCharacter = false,
 }: SelectCharacterProps) {
   const [showSelectedCharacter, setShowSelectedCharacter] = useState(false)
@@ -124,10 +127,10 @@ export function SelectCharacter({
     setShowEndGame(true)
   }
 
-  const handleEndGame = (team: 'blue' | 'red') => {
+  const handleEndGame = (teams: Team[]) => {
     setShowEndGame(false)
     if (onEndGame) {
-      onEndGame(team)
+      onEndGame(teams)
     }
   }
 
@@ -175,7 +178,7 @@ export function SelectCharacter({
           />
         </div>
       </div>
-      <div className='w-full bg-[#1c1c1c] border border-[#272727] rounded p-4 mt-4 '>
+      <div className='w-full h-[400px] overflow-y-auto bg-[#1c1c1c] border border-[#272727] rounded p-4 mt-4 '>
         {filteredCharacters.length > 0 ? (
           <div className='w-full grid grid-cols-8 gap-2'>
             {filteredCharacters.map((character, index) => (
@@ -224,19 +227,21 @@ export function SelectCharacter({
         </div>
       )}
 
-      {status === RoomStatus.SELECTING_CHARACTER && onConfirmBan && (
-        <div className='w-full flex items-center justify-center mt-20'>
-          <button
-            className={`w-1/2 h-[40px] bg-[#1c1c1c] border border-[#272727] text-primary rounded hover:bg-[#272727] ${
-              readOnly ? 'opacity-50 cursor-not-allowed' : ''
-            }`}
-            onClick={onConfirmBan}
-            disabled={readOnly}
-          >
-            Ban
-          </button>
-        </div>
-      )}
+      {status === RoomStatus.SELECTING_CHARACTER &&
+        onConfirmBan &&
+        turn?.currentSelect?.order === SelectType.BAN && (
+          <div className='w-full flex items-center justify-center mt-20'>
+            <button
+              className={`w-1/2 h-[40px] bg-[#1c1c1c] border border-[#272727] text-primary rounded hover:bg-[#272727] ${
+                readOnly ? 'opacity-50 cursor-not-allowed' : ''
+              }`}
+              onClick={onConfirmBan}
+              disabled={readOnly}
+            >
+              Ban
+            </button>
+          </div>
+        )}
 
       {status === RoomStatus.PLAYING && onEndGame && (
         <div className='w-full flex items-center justify-center mt-20'>
@@ -261,10 +266,11 @@ export function SelectCharacter({
         </div>
       )}
 
-      {showEndGame && (
+      {showEndGame && teams && (
         <EndGameModal
           onClose={closeEndGameModal}
           onWin={handleEndGame}
+          teams={teams}
         />
       )}
 

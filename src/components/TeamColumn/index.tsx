@@ -19,7 +19,7 @@ export function TeamColumn({ team, data, turn }: TeamColumnProps) {
     if (!turn) return false
     const indexActive =
       type === SelectType.PICK
-        ? data.picks.findIndex((item) => !item)
+        ? data.picks.findIndex((item) => !item.character)
         : data.bans.findIndex((item) => !item)
 
     const isActive =

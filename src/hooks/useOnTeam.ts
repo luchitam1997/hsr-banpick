@@ -1,7 +1,7 @@
-import { useCallback, useEffect, useMemo, useState } from 'react'
-import { database } from '@/configs/firebase'
-import { ref, onValue, set } from 'firebase/database'
-import { useRouter } from 'next/router'
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { database } from "@/configs/firebase";
+import { ref, onValue, set } from "firebase/database";
+import { useRouter } from "next/router";
 
 import {
   Character,
@@ -12,60 +12,60 @@ import {
   SelectType,
   Team,
   Turn,
-} from '@/hooks/types'
+} from "@/hooks/types";
 
 export const useOnTeam = () => {
-  const router = useRouter()
-  const { roomId, teamId } = router.query
+  const router = useRouter();
+  const { roomId, teamId } = router.query;
 
   const { roomRef } = useMemo(
     () => ({
       roomRef: ref(database, `rooms/${roomId}`),
     }),
     [roomId]
-  )
+  );
 
   // Check status of the room
-  const [roomData, setRoomData] = useState<RoomData | null>(null)
+  const [roomData, setRoomData] = useState<RoomData | null>(null);
 
   useEffect(() => {
     const unsubscribeRoom = onValue(roomRef, (snapshot) => {
-      setRoomData(snapshot.val() as RoomData)
-    })
+      setRoomData(snapshot.val() as RoomData);
+    });
 
     return () => {
-      unsubscribeRoom()
-    }
-  }, [roomRef])
+      unsubscribeRoom();
+    };
+  }, [roomRef]);
 
   const isWaiting = useMemo(() => {
-    return roomData?.status === RoomStatus.WAITING
-  }, [roomData])
+    return roomData?.status === RoomStatus.WAITING;
+  }, [roomData]);
 
   const isCurrentTurn = useMemo(() => {
-    return roomData?.turn.currentPlayer === teamId
-  }, [roomData, teamId])
+    return roomData?.turn.currentPlayer === teamId;
+  }, [roomData, teamId]);
 
   const currentTurn = useMemo(() => {
-    return roomData?.turn
-  }, [roomData])
+    return roomData?.turn;
+  }, [roomData]);
 
   const currentTeam = useMemo(() => {
-    return roomData?.teams.find((team) => team.id === teamId)
-  }, [roomData, teamId])
+    return roomData?.teams.find((team) => team.id === teamId);
+  }, [roomData, teamId]);
 
   const opponentTeam = useMemo(() => {
-    return roomData?.teams.find((team) => team.id !== teamId)
-  }, [roomData, teamId])
+    return roomData?.teams.find((team) => team.id !== teamId);
+  }, [roomData, teamId]);
 
   const selectedCharacter = useMemo(() => {
-    return roomData?.turn.currentCharacter || ''
-  }, [roomData])
+    return roomData?.turn.currentCharacter || "";
+  }, [roomData]);
 
   const teamIndex = useMemo(() => {
-    if (!roomData) return -1
-    return roomData.teams.findIndex((team) => team.id === teamId)
-  }, [roomData, teamId])
+    if (!roomData) return -1;
+    return roomData.teams.findIndex((team) => team.id === teamId);
+  }, [roomData, teamId]);
 
   // const opponentTeamIndex = useMemo(() => {
   //   if (!roomData) return -1
@@ -73,57 +73,57 @@ export const useOnTeam = () => {
   // }, [roomData, teamId])
 
   const isDicing = useMemo(() => {
-    if (!roomData || teamIndex < 0) return false
-    return roomData.status === RoomStatus.DICING
-  }, [roomData, teamIndex])
+    if (!roomData || teamIndex < 0) return false;
+    return roomData.status === RoomStatus.DICING;
+  }, [roomData, teamIndex]);
 
   const isSelectingPriority = useMemo(() => {
-    if (!roomData || teamIndex < 0) return false
-    return roomData.status === RoomStatus.SELECTING_PRIORITY
-  }, [roomData, teamIndex])
+    if (!roomData || teamIndex < 0) return false;
+    return roomData.status === RoomStatus.SELECTING_PRIORITY;
+  }, [roomData, teamIndex]);
 
   const isSelectingNode = useMemo(() => {
-    if (!roomData || teamIndex < 0) return false
-    return roomData.status === RoomStatus.SELECTING_NODE
-  }, [roomData, teamIndex])
+    if (!roomData || teamIndex < 0) return false;
+    return roomData.status === RoomStatus.SELECTING_NODE;
+  }, [roomData, teamIndex]);
 
   const isPlaying = useMemo(() => {
-    if (!roomData || teamIndex < 0) return false
-    return roomData.status === RoomStatus.PLAYING
-  }, [roomData, teamIndex])
+    if (!roomData || teamIndex < 0) return false;
+    return roomData.status === RoomStatus.PLAYING;
+  }, [roomData, teamIndex]);
 
   const isFinished = useMemo(() => {
-    if (!roomData || teamIndex < 0) return false
-    return roomData.status === RoomStatus.FINISHED
-  }, [roomData, teamIndex])
+    if (!roomData || teamIndex < 0) return false;
+    return roomData.status === RoomStatus.FINISHED;
+  }, [roomData, teamIndex]);
 
   const disabledCharacters = useMemo(() => {
-    if (!roomData) return []
+    if (!roomData) return [];
     const teamAPicks = roomData?.teams[0].picks.map(
       (character) => character.character
-    )
-    const teamABans = roomData?.teams[0].bans
+    );
+    const teamABans = roomData?.teams[0].bans;
     const teamBPicks = roomData?.teams[1].picks.map(
       (character) => character.character
-    )
-    const teamBBans = roomData?.teams[1].bans
-    const currentSelect = roomData.turn.currentCharacter
+    );
+    const teamBBans = roomData?.teams[1].bans;
+    const currentSelect = roomData.turn.currentCharacter;
     return [
       ...teamAPicks,
       ...teamABans,
       ...teamBPicks,
       ...teamBBans,
       currentSelect,
-    ]
-  }, [roomData])
+    ];
+  }, [roomData]);
 
   const nodeDisabled = useMemo(() => {
-    if (!roomData || !opponentTeam) return
-    return opponentTeam.node as '11.1' | '11.2' | '12.1' | '12.2'
-  }, [roomData, opponentTeam])
+    if (!roomData || !opponentTeam) return;
+    return opponentTeam.node as "11.1" | "11.2" | "12.1" | "12.2";
+  }, [roomData, opponentTeam]);
 
   const handleSelect = async (character: Character) => {
-    if (!roomData) return
+    if (!roomData) return;
 
     await set(roomRef, {
       ...roomData,
@@ -131,60 +131,60 @@ export const useOnTeam = () => {
         ...roomData.turn,
         currentCharacter: character.name,
       },
-    })
-  }
+    });
+  };
 
   const handleConfirmPick = async (params: CharacterSelect) => {
-    if (!roomData || !currentTeam || !opponentTeam) return
+    if (!roomData || !currentTeam || !opponentTeam) return;
 
     // Check if this is the last pick/ban
-    const isLastTurn = roomData.turn.currentRound === roomData.order.length - 1
+    const isLastTurn = roomData.turn.currentRound === roomData.order.length - 1;
 
-    const currentType = roomData.order[roomData.turn.currentRound]
+    const currentType = roomData.order[roomData.turn.currentRound];
 
     if (currentType.order === SelectType.PICK) {
       for (let i = 0; i < currentTeam.picks.length; i++) {
         if (!currentTeam.picks[i].character) {
-          currentTeam.picks[i] = params
-          break
+          currentTeam.picks[i] = params;
+          break;
         }
       }
     }
 
-    currentTeam.totalPoints += params.point
+    currentTeam.totalPoints += params.point;
 
     const nextRound = isLastTurn
       ? roomData.turn.currentRound
-      : roomData.turn.currentRound + 1
+      : roomData.turn.currentRound + 1;
 
-    const nextSelect = roomData.order[nextRound]
+    const nextSelect = roomData.order[nextRound];
 
     const nextPlayer =
-      nextSelect.team === 'blue' ? roomData.teams[0].id : roomData.teams[1].id
+      nextSelect.team === "blue" ? roomData.teams[0].id : roomData.teams[1].id;
 
     const whoLessPoints =
       currentTeam.totalPoints < opponentTeam.totalPoints
         ? currentTeam.id
-        : opponentTeam.id
+        : opponentTeam.id;
 
     // next turn
     const nextTurn: Turn = isLastTurn
       ? {
           currentSelect: null,
-          currentCharacter: '',
+          currentCharacter: "",
           currentRound: 0,
           currentPlayer: whoLessPoints,
         }
       : {
           currentSelect: nextSelect,
-          currentCharacter: '',
+          currentCharacter: "",
           currentRound: nextRound,
           currentPlayer: nextPlayer,
-        }
+        };
 
     const status = isLastTurn
       ? RoomStatus.PLAYING
-      : RoomStatus.SELECTING_CHARACTER
+      : RoomStatus.SELECTING_CHARACTER;
 
     await set(roomRef, {
       ...roomData,
@@ -193,41 +193,41 @@ export const useOnTeam = () => {
       ),
       turn: nextTurn,
       status,
-    })
-  }
+    });
+  };
 
   const handleConfirmBan = async () => {
-    if (!roomData) return
+    if (!roomData) return;
 
     const currentTeam = roomData.teams.find(
       (team) => team.id === roomData.turn.currentPlayer
-    )
+    );
 
-    if (!currentTeam) return
+    if (!currentTeam) return;
 
     for (let i = 0; i < currentTeam.bans.length; i++) {
       if (!currentTeam.bans[i]) {
-        currentTeam.bans[i] = roomData.turn.currentCharacter
-        break
+        currentTeam.bans[i] = roomData.turn.currentCharacter;
+        break;
       }
     }
 
-    const nextRound = roomData.turn.currentRound + 1
+    const nextRound = roomData.turn.currentRound + 1;
 
-    const nextSelect = roomData.order[nextRound]
+    const nextSelect = roomData.order[nextRound];
 
     const nextPlayer =
-      nextSelect.team === 'blue' ? roomData.teams[0].id : roomData.teams[1].id
+      nextSelect.team === "blue" ? roomData.teams[0].id : roomData.teams[1].id;
 
     // next turn
     const nextTurn: Turn = {
       currentSelect: nextSelect,
-      currentCharacter: '',
+      currentCharacter: "",
       currentRound: nextRound,
       currentPlayer: nextPlayer,
-    }
+    };
 
-    const status = RoomStatus.SELECTING_CHARACTER
+    const status = RoomStatus.SELECTING_CHARACTER;
 
     await set(roomRef, {
       ...roomData,
@@ -236,85 +236,86 @@ export const useOnTeam = () => {
       ),
       turn: nextTurn,
       status,
-    })
-  }
+    });
+  };
 
   const countdown = useCallback(async () => {
-    if (!roomData || !isCurrentTurn) return
+    if (!roomData || !isCurrentTurn) return;
 
     const currentTeam = roomData.teams.find(
       (team) => team.id === roomData.turn.currentPlayer
-    )
+    );
 
-    if (!currentTeam || currentTeam.timeRemaining <= 0) return
+    if (!currentTeam || currentTeam.timeRemaining <= 0) return;
 
     const updatedTeam = {
       ...currentTeam,
       timeRemaining: currentTeam.timeRemaining - 1,
-    }
+    };
 
     await set(roomRef, {
       ...roomData,
       teams: roomData.teams.map((team) =>
         team.id === roomData.turn.currentPlayer ? updatedTeam : team
       ),
-    })
-  }, [roomData, roomRef, isCurrentTurn])
+    });
+  }, [roomData, roomRef, isCurrentTurn]);
 
   useEffect(() => {
     if (roomData && roomData.status === RoomStatus.SELECTING_CHARACTER) {
       const timer = setInterval(() => {
-        countdown()
-      }, 1000)
+        countdown();
+      }, 1000);
 
-      return () => clearInterval(timer)
+      return () => clearInterval(timer);
     }
-  }, [roomData, countdown])
+  }, [roomData, countdown]);
 
   const handleRoll = async (value: 1 | 2 | 3 | 4 | 5 | 6) => {
-    if (!roomData || !currentTeam || !opponentTeam) return
+    if (!roomData || !currentTeam || !opponentTeam) return;
 
     const updatedTeam: Team = {
       ...currentTeam,
       dice: value,
-    }
+    };
 
     const updateRoomData = {
       ...roomData,
       teams: roomData.teams.map((team) =>
         team.id === teamId ? updatedTeam : team
       ),
-    }
+    };
 
     if (opponentTeam.dice) {
       if (value === opponentTeam.dice) {
-        roomData.teams.map((team) => delete team.dice)
+        roomData.teams.map((team) => delete team.dice);
         await set(roomRef, {
           ...roomData,
           teams: roomData.teams,
-        })
-        return
+        });
+        return;
       }
       const winner =
-        value > opponentTeam.dice ? currentTeam.id : opponentTeam.id
-      updateRoomData.status = RoomStatus.SELECTING_PRIORITY
-      updateRoomData.turn.currentPlayer = winner
+        value > opponentTeam.dice ? currentTeam.id : opponentTeam.id;
+      updateRoomData.status = RoomStatus.SELECTING_PRIORITY;
+      updateRoomData.turn.currentPlayer = winner;
     }
 
-    await set(roomRef, updateRoomData)
-  }
+    await set(roomRef, updateRoomData);
+  };
 
   const handleSelectPriority = async (priority: DiceType) => {
-    if (!roomData || !currentTeam || !opponentTeam) return
+    if (!roomData || !currentTeam || !opponentTeam) return;
 
     const opponentPriority =
-      priority === DiceType.NODE ? DiceType.BANPICK : DiceType.NODE
+      priority === DiceType.NODE ? DiceType.BANPICK_FIRST : DiceType.NODE;
 
     const isSwitchTeam =
-      (priority === DiceType.BANPICK && teamIndex === 1) ||
-      (priority === DiceType.NODE && teamIndex === 0)
+      (priority === DiceType.BANPICK_FIRST && teamIndex === 1) ||
+      (priority === DiceType.BANPICK_LAST && teamIndex === 0) ||
+      (priority === DiceType.NODE && teamIndex === 0);
 
-    const newTeams = isSwitchTeam ? roomData.teams.reverse() : roomData.teams
+    const newTeams = isSwitchTeam ? roomData.teams.reverse() : roomData.teams;
 
     const updateRoomData = {
       ...roomData,
@@ -332,37 +333,37 @@ export const useOnTeam = () => {
               selectPriority: opponentPriority,
             }
       ),
-    }
-    await set(roomRef, updateRoomData)
-  }
+    };
+    await set(roomRef, updateRoomData);
+  };
 
-  const handleSelectNode = async (map: '11.1' | '11.2' | '12.1' | '12.2') => {
-    if (!roomData || !currentTeam || !opponentTeam) return
+  const handleSelectNode = async (map: "11.1" | "11.2" | "12.1" | "12.2") => {
+    if (!roomData || !currentTeam || !opponentTeam) return;
 
     const updatedTeam: Team = {
       ...currentTeam,
       node: map,
-    }
+    };
 
     const updateRoomData = {
       ...roomData,
       teams: roomData.teams.map((team) =>
         team.id === teamId ? updatedTeam : team
       ),
-    }
+    };
 
     if (opponentTeam.node) {
-      updateRoomData.status = RoomStatus.SELECTING_CHARACTER
-      updateRoomData.turn.currentPlayer = roomData.teams[0].id
-      updateRoomData.turn.currentCharacter = ''
-      updateRoomData.turn.currentRound = 0
-      updateRoomData.turn.currentSelect = roomData.order[0]
+      updateRoomData.status = RoomStatus.SELECTING_CHARACTER;
+      updateRoomData.turn.currentPlayer = roomData.teams[0].id;
+      updateRoomData.turn.currentCharacter = "";
+      updateRoomData.turn.currentRound = 0;
+      updateRoomData.turn.currentSelect = roomData.order[0];
     } else {
-      updateRoomData.turn.currentPlayer = opponentTeam.id
+      updateRoomData.turn.currentPlayer = opponentTeam.id;
     }
 
-    await set(roomRef, updateRoomData)
-  }
+    await set(roomRef, updateRoomData);
+  };
 
   return {
     roomData,
@@ -385,5 +386,5 @@ export const useOnTeam = () => {
     handleRoll,
     handleSelectNode,
     handleSelectPriority,
-  }
-}
+  };
+};

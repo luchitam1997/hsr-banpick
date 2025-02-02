@@ -68,9 +68,9 @@ export const useOnTeam = () => {
   }, [roomData, teamId]);
 
   // const opponentTeamIndex = useMemo(() => {
-  //   if (!roomData) return -1
-  //   return roomData.teams.findIndex((team) => team.id !== teamId)
-  // }, [roomData, teamId])
+  //   if (!roomData) return -1;
+  //   return roomData.teams.findIndex((team) => team.id !== teamId);
+  // }, [roomData, teamId]);
 
   const isDicing = useMemo(() => {
     if (!roomData || teamIndex < 0) return false;
@@ -365,6 +365,24 @@ export const useOnTeam = () => {
     await set(roomRef, updateRoomData);
   };
 
+  const handleSelectRelic = async (characterSelect: CharacterSelect) => {
+    if (!roomData || !currentTeam) return;
+
+    const updatedTeam: Team = {
+      ...currentTeam,
+      picks: currentTeam.picks.map((pick) =>
+        pick.character === characterSelect.character ? characterSelect : pick
+      ),
+    };
+
+    await set(roomRef, {
+      ...roomData,
+      teams: roomData.teams.map((team) =>
+        team.id === teamId ? updatedTeam : team
+      ),
+    });
+  };
+
   return {
     roomData,
     isWaiting,
@@ -380,11 +398,13 @@ export const useOnTeam = () => {
     disabledCharacters,
     selectedCharacter,
     nodeDisabled,
+    teamIndex,
     handleConfirmBan,
     handleConfirmPick,
     handleSelect,
     handleRoll,
     handleSelectNode,
     handleSelectPriority,
+    handleSelectRelic,
   };
 };

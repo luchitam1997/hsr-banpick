@@ -40,8 +40,8 @@ export enum WeaponType {
 export interface CharacterSelect {
   character: string;
   relic: number;
-  weapon: WeaponType;
-  weaponLevel: number;
+  weapon?: WeaponType;
+  weaponLevel?: number;
   point: number;
 }
 

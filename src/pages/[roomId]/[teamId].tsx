@@ -1,14 +1,14 @@
-import { TeamColumn } from '@/components/TeamColumn'
-import { SelectCharacter } from '@/components/SelectCharacter'
-import { useOnTeam } from '@/hooks/useOnTeam'
-import WaitingScreen from '@/components/WaitingScreen'
-import { RoomStatus } from '@/hooks/types'
-import { SelectingPriorityScreen } from '@/components/SelectingPriorityScreen'
-import Head from 'next/head'
-import { DicingScreen } from '@/components/DicingScreen'
-import { SelectingNodeScreen } from '@/components/SelectingNodeScreen'
-import PlayingScreen from '@/components/PlayingScreen'
-import EndGameScreen from '@/components/EndGameScreen'
+import { TeamColumn } from "@/components/TeamColumn";
+import { SelectCharacter } from "@/components/SelectCharacter";
+import { useOnTeam } from "@/hooks/useOnTeam";
+import WaitingScreen from "@/components/WaitingScreen";
+import { RoomStatus } from "@/hooks/types";
+import { SelectingPriorityScreen } from "@/components/SelectingPriorityScreen";
+import Head from "next/head";
+import { DicingScreen } from "@/components/DicingScreen";
+import { SelectingNodeScreen } from "@/components/SelectingNodeScreen";
+import PlayingScreen from "@/components/PlayingScreen";
+import EndGameScreen from "@/components/EndGameScreen";
 
 export default function TeamPage() {
   const {
@@ -25,15 +25,17 @@ export default function TeamPage() {
     nodeDisabled,
     disabledCharacters,
     selectedCharacter,
+
     handleConfirmBan,
     handleConfirmPick,
     handleSelect,
     handleRoll,
     handleSelectNode,
     handleSelectPriority,
-  } = useOnTeam()
+    handleSelectRelic,
+  } = useOnTeam();
   return (
-    <main className='w-full h-full p-5'>
+    <main className="w-full h-full p-5">
       <Head>
         <title>{`HSR: ${roomData?.name} / ${currentTeam?.name}`}</title>
       </Head>
@@ -43,20 +45,22 @@ export default function TeamPage() {
         roomData?.status === RoomStatus.PLAYING) && (
         <div>
           {/* Header */}
-          <div className='w-full h-full flex items-center gap-1'>
-            <p className='text-secondary text-2xl font-bold'>
+          <div className="w-full h-full flex items-center gap-1">
+            <p className="text-secondary text-2xl font-bold">
               Honkai Star Rail: All stars competition /
             </p>
-            <p className='text-primary text-2xl font-bold'>{roomData?.name}</p>
+            <p className="text-primary text-2xl font-bold">{roomData?.name}</p>
           </div>
 
-          <div className='mt-4 flex flex-row gap-4'>
+          <div className="mt-4 flex flex-row gap-4">
             {/* Team A */}
-            {roomData && roomData.teams[0] && (
+            {roomData && roomData.teams[0] && currentTeam && (
               <TeamColumn
-                team='blue'
+                team="blue"
                 data={roomData.teams[0]}
                 turn={currentTurn}
+                onSelectRelic={handleSelectRelic}
+                readOnly={currentTeam.id !== roomData.teams[0].id}
               />
             )}
 
@@ -73,11 +77,13 @@ export default function TeamPage() {
             />
 
             {/* Team B */}
-            {roomData && roomData.teams[1] && (
+            {roomData && roomData.teams[1] && currentTeam && (
               <TeamColumn
-                team='red'
+                team="red"
                 data={roomData.teams[1]}
                 turn={currentTurn}
+                onSelectRelic={handleSelectRelic}
+                readOnly={currentTeam.id !== roomData.teams[1].id}
               />
             )}
           </div>
@@ -89,10 +95,7 @@ export default function TeamPage() {
 
       {/* Dicing */}
       {isDicing && (
-        <DicingScreen
-          onRoll={handleRoll}
-          value={currentTeam?.dice}
-        />
+        <DicingScreen onRoll={handleRoll} value={currentTeam?.dice} />
       )}
 
       {isSelectingPriority &&
@@ -114,9 +117,9 @@ export default function TeamPage() {
 
       {isFinished && currentTeam && roomData && roomData.winner && (
         <EndGameScreen
-          status={roomData.winner === currentTeam.id ? 'win' : 'lose'}
+          status={roomData.winner === currentTeam.id ? "win" : "lose"}
         />
       )}
     </main>
-  )
+  );
 }

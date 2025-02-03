@@ -316,16 +316,6 @@ export const useOnTeam = () => {
       ),
     };
 
-    if (opponentTeam.node) {
-      updateRoomData.status = RoomStatus.SELECTING_CHARACTER;
-      updateRoomData.turn.currentPlayer = roomData.teams[0].id;
-      updateRoomData.turn.currentCharacter = "";
-      updateRoomData.turn.currentRound = 0;
-      updateRoomData.turn.currentSelect = roomData.order[0];
-    } else {
-      updateRoomData.turn.currentPlayer = opponentTeam.id;
-    }
-
     await set(roomRef, updateRoomData);
   };
 

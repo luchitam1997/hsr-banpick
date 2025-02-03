@@ -7,6 +7,7 @@ import EndGameAudienceScreen from "@/components/EndGameAudienceScreen";
 import { useOnAudiences } from "@/hooks/useOnAudiences";
 import { DicingScreen } from "@/components/DicingScreen";
 import { SelectingPriorityScreen } from "@/components/SelectingPriorityScreen";
+import { SelectingNodeScreen } from "@/components/SelectingNodeScreen";
 
 export default function AudiencePage() {
   const {
@@ -21,9 +22,11 @@ export default function AudiencePage() {
     isDicing,
     isSelectCharacter,
     isSelectPriority,
+    isSelectNode,
     currentTeam,
     handleNextDicing,
     handleNextSelectPriority,
+    handleNextSelectNode,
   } = useOnAudiences();
   return (
     <main className="w-full h-full p-5">
@@ -84,6 +87,14 @@ export default function AudiencePage() {
         <SelectingPriorityScreen
           onNext={handleNextSelectPriority}
           currentTeam={currentTeam}
+        />
+      )}
+
+      {isSelectNode && roomData && currentTeam && (
+        <SelectingNodeScreen
+          readonly
+          teams={roomData.teams}
+          onNext={handleNextSelectNode}
         />
       )}
 

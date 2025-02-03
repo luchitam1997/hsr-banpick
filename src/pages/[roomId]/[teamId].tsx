@@ -112,11 +112,13 @@ export default function TeamPage() {
           <WaitingScreen />
         ))}
 
-      {isSelectingNode && (
+      {isSelectingNode && roomData && currentTeam && (
         <SelectingNodeScreen
           onSelectNode={handleSelectNode}
           nodeDisabled={nodeDisabled}
-          readonly={!isCurrentTurn}
+          isCurrentTurn={isCurrentTurn}
+          readonly={false}
+          teams={roomData.teams}
         />
       )}
 

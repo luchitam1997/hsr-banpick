@@ -45,6 +45,10 @@ export const useOnAudiences = () => {
     return roomData?.status === RoomStatus.SELECTING_CHARACTER;
   }, [roomData]);
 
+  const isSelectNode = useMemo(() => {
+    return roomData?.status === RoomStatus.SELECTING_NODE;
+  }, [roomData]);
+
   const isSelectPriority = useMemo(() => {
     return roomData?.status === RoomStatus.SELECTING_PRIORITY;
   }, [roomData]);
@@ -217,6 +221,28 @@ export const useOnAudiences = () => {
     await set(roomRef, updateRoomData);
   };
 
+  const handleNextSelectNode = async () => {
+    if (!roomData) return;
+
+    const updatedRoomData = {
+      ...roomData,
+    };
+
+    const teamNotSelectNode = roomData.teams.find((team) => !team.node);
+
+    if (teamNotSelectNode) {
+      updatedRoomData.turn.currentPlayer = teamNotSelectNode.id;
+    } else {
+      updatedRoomData.status = RoomStatus.SELECTING_CHARACTER;
+      updatedRoomData.turn.currentPlayer = roomData.teams[0].id;
+      updatedRoomData.turn.currentCharacter = "";
+      updatedRoomData.turn.currentRound = 0;
+      updatedRoomData.turn.currentSelect = roomData.order[0];
+    }
+
+    await set(roomRef, updatedRoomData);
+  };
+
   return {
     roomData,
     isFinished,
@@ -226,11 +252,13 @@ export const useOnAudiences = () => {
     currentTurn,
     isWaiting,
     isDicing,
+    isSelectNode,
     isSelectCharacter,
     isSelectPriority,
     currentTeam,
     handleNextDicing,
     handleNextSelectPriority,
     handleEndGame,
+    handleNextSelectNode,
   };
 };

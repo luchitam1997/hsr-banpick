@@ -1,13 +1,13 @@
 import { TeamColumn } from "@/components/TeamColumn";
 import { SelectCharacter } from "@/components/SelectCharacter";
 
-import WaitingScreen from "@/components/WaitingScreen";
 import Head from "next/head";
 import EndGameAudienceScreen from "@/components/EndGameAudienceScreen";
 import { useOnAudiences } from "@/hooks/useOnAudiences";
 import { DicingScreen } from "@/components/DicingScreen";
 import { SelectingPriorityScreen } from "@/components/SelectingPriorityScreen";
 import { SelectingNodeScreen } from "@/components/SelectingNodeScreen";
+import WaitingScreen from "@/components/WaitingScreen";
 
 export default function AudiencePage() {
   const {
@@ -23,10 +23,14 @@ export default function AudiencePage() {
     isSelectCharacter,
     isSelectPriority,
     isSelectNode,
+    isSelectRelic,
+    isPlaying,
     currentTeam,
     handleNextDicing,
     handleNextSelectPriority,
     handleNextSelectNode,
+    handleNextSelectCharacter,
+    handleNextSelectRelic,
   } = useOnAudiences();
   return (
     <main className="w-full h-full p-5">
@@ -34,7 +38,7 @@ export default function AudiencePage() {
         <title>{`HSR: All stars / ${roomData?.name}`}</title>
       </Head>
 
-      {isSelectCharacter && (
+      {(isSelectCharacter || isSelectRelic || isPlaying) && (
         <div>
           {/* Header */}
           <div className="w-full h-full flex items-center gap-1">
@@ -50,6 +54,7 @@ export default function AudiencePage() {
                 team="blue"
                 data={roomData.teams[0]}
                 turn={currentTurn}
+                readOnly
               />
             )}
 
@@ -63,6 +68,8 @@ export default function AudiencePage() {
               orders={roomData?.order}
               turn={currentTurn}
               teams={roomData?.teams}
+              onNextSelectCharacter={handleNextSelectCharacter}
+              onNextSelectRelic={handleNextSelectRelic}
             />
 
             {/* Team B */}
@@ -71,13 +78,14 @@ export default function AudiencePage() {
                 team="red"
                 data={roomData.teams[1]}
                 turn={currentTurn}
+                readOnly
               />
             )}
           </div>
         </div>
       )}
 
-      {isWaiting && <WaitingScreen />}
+      {isWaiting && <WaitingScreen title="Waiting for game start" />}
       {/* Dicing */}
       {isDicing && roomData && (
         <DicingScreen teams={roomData.teams} onNext={handleNextDicing} />

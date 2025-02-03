@@ -13,6 +13,7 @@ export enum RoomStatus {
   SELECTING_PRIORITY = "selecting_priority",
   SELECTING_NODE = "selecting_node",
   SELECTING_CHARACTER = "selecting_character",
+  SELECTING_RELIC = "selecting_relic",
   PLAYING = "playing",
   FINISHED = "finished",
 }

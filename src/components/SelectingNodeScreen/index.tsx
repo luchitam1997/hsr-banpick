@@ -16,7 +16,7 @@ export const SelectingNodeScreen = ({
   onSelectNode,
   nodeDisabled,
   readonly = false,
-  isCurrentTurn = false,
+  isCurrentTurn,
   teams,
   onNext,
 }: SelectingNodeScreenProps) => {

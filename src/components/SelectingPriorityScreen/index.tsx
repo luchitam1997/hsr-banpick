@@ -57,6 +57,7 @@ export const SelectingPriorityScreen = ({
               >
                 Ban/Pick
                 {currentTeam &&
+                  currentTeam.selectPriority &&
                   currentTeam.selectPriority !== DiceType.NODE && <Tooltip />}
               </div>
             </>

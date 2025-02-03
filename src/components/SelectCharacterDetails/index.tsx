@@ -3,7 +3,7 @@ import { BaseModal } from "../BaseModal.tsx";
 import characters from "@/resources/characters.json";
 import costs from "@/resources/costs.json";
 import Image from "next/image";
-import { CharacterSelect, WeaponType } from "@/hooks/types";
+import { CharacterSelect } from "@/hooks/types";
 
 interface SelectCharacterDetailsProps {
   selectedCharacter: string;

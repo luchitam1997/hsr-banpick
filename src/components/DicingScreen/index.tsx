@@ -74,12 +74,7 @@ export const DicingScreen = ({
   }, [currentTeam, teams[0].dice, teams[1].dice]);
 
   const buttonLabel = useMemo(() => {
-    if (
-      currentTeam &&
-      teams[0].dice &&
-      teams[1].dice &&
-      teams[0].dice === teams[1].dice
-    ) {
+    if (teams[0].dice && teams[1].dice && teams[0].dice === teams[1].dice) {
       return "Reroll";
     }
     return "Next";

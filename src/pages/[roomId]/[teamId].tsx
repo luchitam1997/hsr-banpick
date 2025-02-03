@@ -1,7 +1,7 @@
 import { TeamColumn } from "@/components/TeamColumn";
 import { SelectCharacter } from "@/components/SelectCharacter";
 import { useOnTeam } from "@/hooks/useOnTeam";
-import WaitingScreen from "@/components/WaitingScreen";
+
 import { RoomStatus } from "@/hooks/types";
 import { SelectingPriorityScreen } from "@/components/SelectingPriorityScreen";
 import Head from "next/head";
@@ -9,6 +9,8 @@ import { DicingScreen } from "@/components/DicingScreen";
 import { SelectingNodeScreen } from "@/components/SelectingNodeScreen";
 import PlayingScreen from "@/components/PlayingScreen";
 import EndGameScreen from "@/components/EndGameScreen";
+import { useMemo } from "react";
+import WaitingScreen from "@/components/WaitingScreen";
 
 export default function TeamPage() {
   const {
@@ -34,6 +36,23 @@ export default function TeamPage() {
     handleSelectPriority,
     handleSelectRelic,
   } = useOnTeam();
+
+  const teamAReadOnly = useMemo(() => {
+    if (!roomData || !currentTeam) return true;
+    return (
+      currentTeam.id !== roomData.teams[0].id ||
+      roomData.teams[0].timeRemaining === 0
+    );
+  }, [roomData, currentTeam]);
+
+  const teamBReadOnly = useMemo(() => {
+    if (!roomData || !currentTeam) return true;
+    return (
+      currentTeam.id !== roomData.teams[1].id ||
+      roomData.teams[1].timeRemaining === 0
+    );
+  }, [roomData, currentTeam]);
+
   return (
     <main className="w-full h-full p-5">
       <Head>
@@ -42,6 +61,7 @@ export default function TeamPage() {
 
       {/* Select Character */}
       {(roomData?.status === RoomStatus.SELECTING_CHARACTER ||
+        roomData?.status === RoomStatus.SELECTING_RELIC ||
         roomData?.status === RoomStatus.PLAYING) && (
         <div>
           {/* Header */}
@@ -60,7 +80,7 @@ export default function TeamPage() {
                 data={roomData.teams[0]}
                 turn={currentTurn}
                 onSelectRelic={handleSelectRelic}
-                readOnly={currentTeam.id !== roomData.teams[0].id}
+                readOnly={teamAReadOnly}
               />
             )}
 
@@ -74,6 +94,7 @@ export default function TeamPage() {
               status={roomData?.status}
               orders={roomData?.order}
               turn={currentTurn}
+              teams={roomData?.teams}
             />
 
             {/* Team B */}
@@ -83,7 +104,7 @@ export default function TeamPage() {
                 data={roomData.teams[1]}
                 turn={currentTurn}
                 onSelectRelic={handleSelectRelic}
-                readOnly={currentTeam.id !== roomData.teams[1].id}
+                readOnly={teamBReadOnly}
               />
             )}
           </div>
@@ -91,7 +112,7 @@ export default function TeamPage() {
       )}
 
       {/* Waiting */}
-      {isWaiting && <WaitingScreen />}
+      {isWaiting && <WaitingScreen title="Waiting for game start" />}
 
       {/* Dicing */}
       {isDicing && roomData && currentTeam && (
@@ -109,7 +130,7 @@ export default function TeamPage() {
             currentTeam={currentTeam}
           />
         ) : (
-          <WaitingScreen />
+          <WaitingScreen title="Waiting for other team" />
         ))}
 
       {isSelectingNode && roomData && currentTeam && (

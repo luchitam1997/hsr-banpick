@@ -19,7 +19,9 @@ interface SelectCharacterProps {
   onSelect?: (character: Character) => void;
   onConfirmPick?: (params: CharacterSelect) => void;
   onConfirmBan?: () => void;
-  onEndGame?: (teams: Team[]) => void;
+  onEndGame?: (team: Team) => void;
+  onNextSelectCharacter?: () => void;
+  onNextSelectRelic?: () => void;
   selectedCharacter: string;
   disabledCharacters: string[];
   status?: RoomStatus;
@@ -35,6 +37,8 @@ export function SelectCharacter({
   onConfirmPick,
   onConfirmBan,
   onEndGame,
+  onNextSelectCharacter,
+  onNextSelectRelic,
   selectedCharacter,
   disabledCharacters,
   status,
@@ -127,10 +131,10 @@ export function SelectCharacter({
     setShowEndGame(true);
   };
 
-  const handleEndGame = (teams: Team[]) => {
+  const handleEndGame = (team: Team) => {
     setShowEndGame(false);
     if (onEndGame) {
-      onEndGame(teams);
+      onEndGame(team);
     }
   };
 
@@ -154,8 +158,51 @@ export function SelectCharacter({
 
   return (
     <div className="basis-1/2">
+      {teams && (
+        <div className="w-full flex items-center justify-between mt-4">
+          <p className="text-white text-2xl font-bold text-center border border-blue-500 rounded-lg p-2 w-[100px]">
+            {teams[0].totalPoints}
+          </p>
+          <p className="text-white text-2xl font-bold text-center border border-red-500 rounded-lg p-2 w-[100px]">
+            {teams[1].totalPoints}
+          </p>
+        </div>
+      )}
+
       {/* Characters list */}
-      <div className="w-full flex items-center justify-between">
+      <div className="w-full h-[400px] overflow-y-auto bg-[#1c1c1c] border border-[#272727] rounded p-4 mt-4 ">
+        {filteredCharacters.length > 0 ? (
+          <div className="w-full grid grid-cols-8 gap-2">
+            {filteredCharacters.map((character, index) => (
+              <div
+                key={index}
+                className="flex flex-col items-center justify-between"
+              >
+                <Image
+                  width={100}
+                  height={100}
+                  key={index}
+                  src={character.avatar}
+                  alt={character.name}
+                  className={`  ${
+                    isDisabled(character)
+                      ? "grayscale cursor-not-allowed"
+                      : "cursor-pointer hover:opacity-50"
+                  }`}
+                  onClick={() => handleSelectChar(character)}
+                />
+                <span className="w-full text-primary text-xs font-bold text-center text-ellipsis overflow-hidden whitespace-nowrap">
+                  {character.name}
+                </span>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <p className="w-full text-primary text-center">No characters found</p>
+        )}
+      </div>
+
+      <div className="w-full flex items-center justify-between mt-4">
         <div className="flex gap-2">
           {DESTINIES.map((destiny, index) => (
             <div
@@ -192,37 +239,6 @@ export function SelectCharacter({
           />
         </div>
       </div>
-      <div className="w-full h-[400px] overflow-y-auto bg-[#1c1c1c] border border-[#272727] rounded p-4 mt-4 ">
-        {filteredCharacters.length > 0 ? (
-          <div className="w-full grid grid-cols-8 gap-2">
-            {filteredCharacters.map((character, index) => (
-              <div
-                key={index}
-                className="flex flex-col items-center justify-between"
-              >
-                <Image
-                  width={100}
-                  height={100}
-                  key={index}
-                  src={character.avatar}
-                  alt={character.name}
-                  className={`  ${
-                    isDisabled(character)
-                      ? "grayscale cursor-not-allowed"
-                      : "cursor-pointer hover:opacity-50"
-                  }`}
-                  onClick={() => handleSelectChar(character)}
-                />
-                <span className="w-full text-primary text-xs font-bold text-center text-ellipsis overflow-hidden whitespace-nowrap">
-                  {character.name}
-                </span>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <p className="w-full text-primary text-center">No characters found</p>
-        )}
-      </div>
 
       {orders && orders.length > 0 && (
         <div className="w-full mt-4 flex items-center justify-center gap-2">
@@ -231,9 +247,12 @@ export function SelectCharacter({
               key={index}
               className={`p-3 text-primary rounded-full ${
                 order.team === "blue" ? "bg-blue-500" : "bg-red-500"
-              } ${turn?.currentRound === index ? "animate-pulse" : ""} ${
-                order.team === "red" ? "translate-y-full" : ""
-              }`}
+              } ${
+                turn?.currentRound === index &&
+                status === RoomStatus.SELECTING_CHARACTER
+                  ? "animate-pulse"
+                  : ""
+              } ${order.team === "red" ? "translate-y-full" : ""}`}
             >
               {order.order === SelectType.PICK ? "Pick" : "Ban"}
             </span>
@@ -272,6 +291,28 @@ export function SelectCharacter({
             </button>
           </div>
         )}
+
+      {status === RoomStatus.SELECTING_CHARACTER && onNextSelectCharacter && (
+        <div className="w-full flex items-center justify-center mt-20">
+          <button
+            className="w-1/2 h-[40px] bg-[#1c1c1c] border border-[#272727] text-primary rounded hover:bg-[#272727]"
+            onClick={onNextSelectCharacter}
+          >
+            Next
+          </button>
+        </div>
+      )}
+
+      {status === RoomStatus.SELECTING_RELIC && onNextSelectRelic && (
+        <div className="w-full flex items-center justify-center mt-20">
+          <button
+            className="w-1/2 h-[40px] bg-[#1c1c1c] border border-[#272727] text-primary rounded hover:bg-[#272727]"
+            onClick={onNextSelectRelic}
+          >
+            Play
+          </button>
+        </div>
+      )}
 
       {status === RoomStatus.PLAYING && onEndGame && (
         <div className="w-full flex items-center justify-center mt-20">

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { database, firestore } from "@/configs/firebase";
 import { ref, onValue, set } from "firebase/database";
 import { useRouter } from "next/router";
@@ -45,12 +45,20 @@ export const useOnAudiences = () => {
     return roomData?.status === RoomStatus.SELECTING_CHARACTER;
   }, [roomData]);
 
+  const isSelectRelic = useMemo(() => {
+    return roomData?.status === RoomStatus.SELECTING_RELIC;
+  }, [roomData]);
+
   const isSelectNode = useMemo(() => {
     return roomData?.status === RoomStatus.SELECTING_NODE;
   }, [roomData]);
 
   const isSelectPriority = useMemo(() => {
     return roomData?.status === RoomStatus.SELECTING_PRIORITY;
+  }, [roomData]);
+
+  const isPlaying = useMemo(() => {
+    return roomData?.status === RoomStatus.PLAYING;
   }, [roomData]);
 
   const currentTurn = useMemo(() => {
@@ -87,21 +95,18 @@ export const useOnAudiences = () => {
     ];
   }, [roomData]);
 
-  const handleEndGame = async (teams: Team[]) => {
+  const handleEndGame = async (team: Team) => {
     if (!roomData) return;
-
-    const whoWin =
-      teams[0].totalPoints < teams[1].totalPoints ? teams[0].id : teams[1].id;
 
     const updatedRoom: RoomData = {
       ...roomData,
       status: RoomStatus.FINISHED,
-      winner: whoWin,
+      winner: team.id,
     };
 
     // Get all picks and bans from both teams
-    const teamA = teams[0];
-    const teamB = teams[1];
+    const teamA = roomData.teams[0];
+    const teamB = roomData.teams[1];
     const teamAPicks = teamA.picks.map((pick) => pick.character);
     const teamABans = teamA.bans;
     const teamBPicks = teamB.picks.map((pick) => pick.character);
@@ -125,10 +130,7 @@ export const useOnAudiences = () => {
     const updatedHistory = {
       picks: [...existingData.picks, ...teamAPicks, ...teamBPicks],
       bans: [...existingData.bans, ...teamABans, ...teamBBans],
-      wons: [
-        ...existingData.wons,
-        ...(whoWin === teamA.id ? teamAPicks : teamBPicks),
-      ],
+      wons: [...existingData.wons, ...team.picks.map((pick) => pick.character)],
       totalGames: existingData.totalGames + 1,
       updatedAt: Math.floor(Date.now() / 1000),
     };
@@ -243,6 +245,52 @@ export const useOnAudiences = () => {
     await set(roomRef, updatedRoomData);
   };
 
+  const handleNextSelectCharacter = async () => {
+    if (!roomData) return;
+
+    const updatedRoomData = {
+      ...roomData,
+      status: RoomStatus.SELECTING_RELIC,
+    };
+
+    await set(roomRef, updatedRoomData);
+  };
+
+  const countdownBothTeams = useCallback(async () => {
+    if (!roomData) return;
+
+    const updateRoomData = {
+      ...roomData,
+      teams: roomData.teams.map((team) => ({
+        ...team,
+        timeRemaining: team.timeRemaining === 0 ? 0 : team.timeRemaining - 1,
+      })),
+    };
+
+    await set(roomRef, updateRoomData);
+  }, [roomData, roomRef]);
+
+  useEffect(() => {
+    if (roomData && roomData.status === RoomStatus.SELECTING_RELIC) {
+      const timer = setInterval(() => {
+        countdownBothTeams();
+      }, 1000);
+
+      return () => clearInterval(timer);
+    }
+  }, [roomData, countdownBothTeams]);
+
+  const handleNextSelectRelic = async () => {
+    if (!roomData) return;
+
+    const updatedRoomData = {
+      ...roomData,
+      status: RoomStatus.PLAYING,
+    };
+
+    await set(roomRef, updatedRoomData);
+  };
+
   return {
     roomData,
     isFinished,
@@ -255,10 +303,14 @@ export const useOnAudiences = () => {
     isSelectNode,
     isSelectCharacter,
     isSelectPriority,
+    isSelectRelic,
+    isPlaying,
     currentTeam,
     handleNextDicing,
     handleNextSelectPriority,
     handleEndGame,
     handleNextSelectNode,
+    handleNextSelectCharacter,
+    handleNextSelectRelic,
   };
 };

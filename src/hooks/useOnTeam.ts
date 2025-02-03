@@ -162,18 +162,13 @@ export const useOnTeam = () => {
     const nextPlayer =
       nextSelect.team === "blue" ? roomData.teams[0].id : roomData.teams[1].id;
 
-    const whoLessPoints =
-      currentTeam.totalPoints < opponentTeam.totalPoints
-        ? currentTeam.id
-        : opponentTeam.id;
-
     // next turn
     const nextTurn: Turn = isLastTurn
       ? {
           currentSelect: null,
           currentCharacter: "",
           currentRound: 0,
-          currentPlayer: whoLessPoints,
+          currentPlayer: "",
         }
       : {
           currentSelect: nextSelect,
@@ -182,17 +177,12 @@ export const useOnTeam = () => {
           currentPlayer: nextPlayer,
         };
 
-    const status = isLastTurn
-      ? RoomStatus.PLAYING
-      : RoomStatus.SELECTING_CHARACTER;
-
     await set(roomRef, {
       ...roomData,
       teams: roomData.teams.map((team) =>
         team.id === roomData.turn.currentPlayer ? currentTeam : team
       ),
       turn: nextTurn,
-      status,
     });
   };
 
@@ -329,12 +319,16 @@ export const useOnTeam = () => {
       ),
     };
 
-    await set(roomRef, {
-      ...roomData,
-      teams: roomData.teams.map((team) =>
-        team.id === teamId ? updatedTeam : team
-      ),
-    });
+    (updatedTeam.totalPoints = updatedTeam.picks.reduce(
+      (acc, pick) => acc + pick.point,
+      0
+    )),
+      await set(roomRef, {
+        ...roomData,
+        teams: roomData.teams.map((team) =>
+          team.id === teamId ? updatedTeam : team
+        ),
+      });
   };
 
   return {

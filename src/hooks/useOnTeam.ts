@@ -286,52 +286,16 @@ export const useOnTeam = () => {
       ),
     };
 
-    if (opponentTeam.dice) {
-      if (value === opponentTeam.dice) {
-        roomData.teams.map((team) => delete team.dice);
-        await set(roomRef, {
-          ...roomData,
-          teams: roomData.teams,
-        });
-        return;
-      }
-      const winner =
-        value > opponentTeam.dice ? currentTeam.id : opponentTeam.id;
-      updateRoomData.status = RoomStatus.SELECTING_PRIORITY;
-      updateRoomData.turn.currentPlayer = winner;
-    }
-
     await set(roomRef, updateRoomData);
   };
 
   const handleSelectPriority = async (priority: DiceType) => {
     if (!roomData || !currentTeam || !opponentTeam) return;
 
-    const opponentPriority =
-      priority === DiceType.NODE ? DiceType.BANPICK_FIRST : DiceType.NODE;
-
-    const isSwitchTeam =
-      (priority === DiceType.BANPICK_FIRST && teamIndex === 1) ||
-      (priority === DiceType.BANPICK_LAST && teamIndex === 0) ||
-      (priority === DiceType.NODE && teamIndex === 0);
-
-    const newTeams = isSwitchTeam ? roomData.teams.reverse() : roomData.teams;
-
     const updateRoomData = {
       ...roomData,
-      status: RoomStatus.SELECTING_NODE,
-      turn: {
-        ...roomData.turn,
-        currentPlayer:
-          priority === DiceType.NODE ? currentTeam.id : opponentTeam.id,
-      },
-      teams: newTeams.map((team) =>
-        team.id === teamId
-          ? { ...team, selectPriority: priority }
-          : {
-              ...team,
-              selectPriority: opponentPriority,
-            }
+      teams: roomData.teams.map((team) =>
+        team.id === teamId ? { ...team, selectPriority: priority } : team
       ),
     };
     await set(roomRef, updateRoomData);

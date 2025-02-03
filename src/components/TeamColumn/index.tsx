@@ -7,7 +7,7 @@ interface TeamColumnProps {
   team: "blue" | "red";
   data: Team;
   turn?: Turn;
-  onSelectRelic: (characterSelect: CharacterSelect) => void;
+  onSelectRelic?: (characterSelect: CharacterSelect) => void;
   readOnly?: boolean;
 }
 export function TeamColumn({

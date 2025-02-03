@@ -8,7 +8,7 @@ interface PickCardProps {
   confirmedCharacter: CharacterSelect;
   isCurrentTurn: boolean;
   selectedCharacter?: string;
-  onSelectRelic: (characterSelect: CharacterSelect) => void;
+  onSelectRelic?: (characterSelect: CharacterSelect) => void;
   readOnly?: boolean;
 }
 
@@ -31,7 +31,7 @@ export default function PickCard({
   }, [confirmedCharacter, selectedCharacter, isCurrentTurn]);
 
   const handleSelectRelic = (value: number) => {
-    if (readOnly) return;
+    if (readOnly || !onSelectRelic) return;
     const charCost = costs.find(
       (cost) =>
         cost.name.toLowerCase() === confirmedCharacter.character.toLowerCase()

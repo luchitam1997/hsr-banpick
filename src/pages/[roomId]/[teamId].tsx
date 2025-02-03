@@ -94,13 +94,20 @@ export default function TeamPage() {
       {isWaiting && <WaitingScreen />}
 
       {/* Dicing */}
-      {isDicing && (
-        <DicingScreen onRoll={handleRoll} value={currentTeam?.dice} />
+      {isDicing && roomData && currentTeam && (
+        <DicingScreen
+          onRoll={handleRoll}
+          teams={roomData.teams}
+          currentTeam={currentTeam}
+        />
       )}
 
       {isSelectingPriority &&
         (isCurrentTurn ? (
-          <SelectingPriorityScreen onSelectPriority={handleSelectPriority} />
+          <SelectingPriorityScreen
+            onSelectPriority={handleSelectPriority}
+            currentTeam={currentTeam}
+          />
         ) : (
           <WaitingScreen />
         ))}

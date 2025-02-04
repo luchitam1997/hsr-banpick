@@ -122,7 +122,7 @@
   {
     "id": 21,
     "name": "Aglaea",
-    "costs": [7.5, 11.5, null, null, null, null, null],
+    "costs": [8, 12, null, null, null, null, null],
     "weapon": 2
   },
   {
@@ -175,7 +175,7 @@
   },
   {
     "id": 30,
-    "name": "Den Heng - IL",
+    "name": "Dan Heng - IL",
     "costs": [4, 5, null, null, null, null, null],
     "weapon": 1
   },
@@ -188,7 +188,7 @@
   {
     "id": 32,
     "name": "Jingliu",
-    "costs": [2, 7, null, null, null, null, null],
+    "costs": [2, 6, null, null, null, null, null],
     "weapon": 1.5
   },
   {
@@ -236,8 +236,8 @@
   {
     "id": 40,
     "name": "Lingsha",
-    "costs": [3.5, 7.5, null, null, null, null, null],
-    "weapon": 2
+    "costs": [3.5, 5.5, null, null, null, null, null],
+    "weapon": 2.5
   },
   {
     "id": 41,
@@ -248,7 +248,7 @@
   {
     "id": 42,
     "name": "Fugue",
-    "costs": [4.5, 9.5, null, null, null, null, null],
+    "costs": [4.5, 9, null, null, null, null, null],
     "weapon": 1.5
   },
   {
@@ -259,7 +259,7 @@
   },
   {
     "id": 44,
-    "name": "Adventurine",
+    "name": "Aventurine",
     "costs": [2.5, 3, null, null, null, null, null],
     "weapon": 1.5
   },
@@ -356,7 +356,7 @@
   {
     "id": 60,
     "name": "The Herta",
-    "costs": [7.5, 10.5, null, null, null, null, null],
+    "costs": [8, 11, null, null, null, null, null],
     "weapon": 2
   },
   {
@@ -380,13 +380,13 @@
   {
     "id": 64,
     "name": "Trailblazer - Harmony",
-    "costs": [4.5, 4.5, 4.5, 4.5, 4.5, 4.5, 4.5],
+    "costs": [4, 4, 4, 4, 4, 4, 4],
     "weapon": 0
   },
   {
     "id": 65,
     "name": "Trailblazer - Remembrance",
-    "costs": [4, 4, 4, 4, 4, 4, 4],
+    "costs": [4.5, 4.5, 4.5, 4.5, 4.5, 4.5, 4.5],
     "weapon": 0
   }
 ]

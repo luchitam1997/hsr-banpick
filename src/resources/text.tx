@@ -1,65 +1,65 @@
-1		Acheron		4.5	6	x	x	x	x	x	2
-2		Argenti		3.5	5	x	x	x	x	x	1
-3		Arlan		1.5	1.5	1.5	1.5	1.5	1.5	1.5	x
-4		Asta		2.5	2.5	2.5	2.5	2.5	2.5	2.5	x
-5		Aventurine		2.5	3	x	x	x	x	x	1.5
-6		Bailu		1	1	1	1	1.5	x	x	x
-7		Black Swan		3	7	x	x	x	x	x	1
-8		Boothill		5.5	8	x	x	x	x	x	2
-9		Blade		3	4	x	x	x	x	x	1.5
-10		Bronya		3.5	4	4.5	4.5	5.5	x	x	x
-11		Clara		2.5	3	3.5	3.5	4	x	x	x
-12		Dan Heng - IL		4	5	x	x	x	x	x	1
-13		Danheng		1.5	1.5	1.5	1.5	1.5	1.5	1.5	x
-14		Dr.Ratio		5	6.5	x	x	x	x	x	2
-15		Fu Xuan		1.5	3	x	x	x	x	x	0.5
-16		FireFly		6	8.5	x	x	x	x	x	1.5
-17		Gepard		1	1	1	1	1.5	x	x	x
-18		Gallagher		2	2	2	2	2	2	2	x
-19		Guinaifen		2	2	2	2	2	2	2	x
-20		Hanya		2.5	2.5	2.5	2.5	2.5	2.5	2.5	x
-21		Herta		2	2	2	2	2	2	2	x
-22		Himeko		2	2.5	3	3	3.5	x	x	x
-23		Hook		1.5	1.5	1.5	1.5	1.5	1.5	1.5	x
-24		Huohuo		2.5	4	x	x	x	x	x	0.5
-25		Jing Yuan		3.5	4.5	x	x	x	x	x	1
-26		Jingliu		2	7	x	x	x	x	x	1.5
-27		Jade		2.5	5	x	x	x	x	x	1.5
-28		Kafka		3	5.5	x	x	x	x	x	1
-29		Luka		2	2	2	2	2	2	2	x
-30		Luocha		1.5	2	x	x	x	x	x	0.5
-31		Lynx		1	1	1	1	1	1	1	x
-32		Main Hoả		1.5	1.5	1.5	1.5	1.5	1.5	1.5	x
-33		Main Vật Lý		2	2	2	2	2	2	2	x
-34		Main Hòa Hợp		4.5	4.5	4.5	4.5	4.5	4.5	4.5	x
-35		March 7		1.5	1.5	1.5	1.5	1.5	1.5	1.5	x
-36		March 7 (SA)		3.5	3.5	3.5	3.5	3.5	3.5	3.5	x
-37		Misha		1.5	1.5	1.5	1.5	1.5	1.5	1.5	x
-38		Natasha		1	1	1	1	1	1	1	x
-39		Pela		3	3	3	3	3	3	3	x
-40		Qingque		1.5	1.5	1.5	1.5	1.5	1.5	1.5	x
-41		Ruan Mei		5	7.5	x	x	x	x	x	1.5
-42		Robin		5	9	x	x	x	x	x	1.5
-43		Sampo		1.5	1.5	1.5	1.5	1.5	1.5	1.5	x
-44		Seele		5	5.5	x	x	x	x	x	1
-45		Serval		2	2	2	2	2	2	2	x
-46		Silver Wolf		3	4.5	x	x	x	x	x	1.5
-47		Sparkle (Hanabi)		3.5	4.5	x	x	x	x	x	1
-48		Sushang		2	2	2	2	2	2	2	x
-49		Tingyun		3.5	3.5	3.5	3.5	3.5	3.5	3.5	x
-50		Topaz & Numby		3	5	x	x	x	x	x	1.5
-51		Welt		1.5	1.5	2	2	2.5	x	x	x
-52		Xueyi		1.5	1.5	1.5	1.5	1.5	1.5	1.5	x
-53		Yunli		5	9.5	x	x	x	x	x	2
-54		Yanqing		1.5	1.5	2	2	3.5	x	x	x
-55		Yukong		2.5	2.5	2.5	2.5	2.5	2.5	2.5	x
-56	 	Feixiao		5.5	9.5	x	x	x	x	x	2
-57		Jiaoqui		3.5	5.5	x	x	x	x	x	2
-58		Moze		3	3	3	3	3	3	3	x
-59		Lingsa		3.5	7.5	x	x	x	x	x	2
-60		Rappa		5	7.5	x	x	x	x	x	2
-61		The Herta		7.5	10.5	x	x	x	x	x	2
-62		Main kí ức		4	4	4	4	4	4	4	x
-63		Fugue		4.5	9.5	x	x	x	x	x	1.5
-64		Sunday		4	7	x	x	x	x	x	2
-65		Aglaea		7.5	11.5	x	x	x	x	x	2
+1		Acheron		4,5	6	x	x	x	x	x	2,5
+2		Argenti		3,5	5	8	9	x	x	x	1
+3		Arlan		1,5	1,5	1,5	1,5	1,5	1,5	1,5	x
+4		Asta		2,5	2,5	2,5	2,5	2,5	2,5	2,5	x
+5		Aglaea		8	12	x	x	x	x	x	2
+6		Aventurine		2,5	3	x	x	x	x	x	1,5
+7		Bailu		1	1	1	1	1,5	1,5	x	x
+8		Black Swan		3	7	x	x	x	x	x	1
+9		Boothill		5,5	8	x	x	x	x	x	2
+10		Blade		3	4	x	x	x	x	x	1,5
+11		Bronya		3,5	4	4,5	4,5	5,5	x	x	x
+12		Clara		2,5	3	3,5	3,5	4	x	x	x
+13		Dan Heng - IL		4	5	x	x	x	x	x	1
+14		Danheng		1,5	1,5	1,5	1,5	1,5	1,5	1,5	x
+15		Dr.Ratio		5	6,5	x	x	x	x	x	2
+16		Fu Xuan		1,5	3	x	x	x	x	x	0,5
+17		FireFly		6	8,5	x	x	x	x	x	1,5
+18		Feixiao		5,5	9,5	x	x	x	x	x	2
+19		Fugue		4,5	9	x	x	x	x	x	1,5
+20		Gepard		1	1	1	1	1,5	x	x	x
+21		Gallagher		2	2	2	2	2	2	2	x
+22		Guinaifen		2	2	2	2	2	2	2	x
+23		Hanya		2,5	2,5	2,5	2,5	2,5	2,5	2,5	x
+24		Herta		2	2	2	2	2	2	2	x
+25		Himeko		2	2,5	3	3	3,5	x	x	x
+26		Hook		1,5	1,5	1,5	1,5	1,5	1,5	1,5	x
+27		Huohuo		2,5	4	x	x	x	x	x	0,5
+28		Jing Yuan		3,5	4,5	x	x	x	x	x	1
+29		Jingliu		2	6	x	x	x	x	x	1,5
+30		Jade		2	5	x	x	x	x	x	1,5
+31		Jiaoqiu		3,5	5,5	8	8,5	x	x	x	2,5
+32		Kafka		3	5,5	x	x	x	x	x	1
+33		Luka		2	2	2	2	2	2	2	x
+34		Luocha		1,5	2	x	x	x	x	x	0,5
+35		Lingsha		3,5	5,5	x	x	x	x	x	2,5
+36		Lynx		1	1	1	1	1	1	1	x
+37		Main Hoả		1,5	1,5	1,5	1,5	1,5	1,5	1,5	x
+38		Main Vật Lý		2	2	2	2	2	2	2	x
+39		Main Hòa Hợp		4	4	4	4	4	4	4	x
+40		Main Ký Ức		4,5	4,5	4,5	4,5	4,5	4,5	4,5	x
+41		March 7		1,5	1,5	1,5	1,5	1,5	1,5	1,5	x
+42		March 7 (SA)		3,5	3,5	3,5	3,5	3,5	3,5	3,5	x
+43		Moze		3	3	3	3	3	3	3	x
+44		Misha		1,5	1,5	1,5	1,5	1,5	1,5	1,5	x
+45		Natasha		1	1	1	1	1	1	1	x
+46		Pela		3	3	3	3	3	3	3	x
+47		Qingque		1,5	1,5	1,5	1,5	1,5	1,5	1,5	x
+48		Ruan Mei		5	7,5	x	x	x	x	x	1,5
+49		Robin		5	9	x	x	x	x	x	1,5
+50		Rappa		5	7,5	17	17,5	x	x	x	2
+51		Sampo		1,5	1,5	1,5	1,5	1,5	1,5	1,5	x
+52		Seele		5	5,5	x	x	x	x	x	1
+53		Serval		2	2	2	2	2	2	2	x
+54		Silver Wolf		3	4,5	x	x	x	x	x	1,5
+55		Sunday		4	7	x	x	x	x	x	2
+56		Sparkle (Hanabi)		3,5	4,5	x	x	x	x	x	1
+57		Sushang		2	2	2	2	2	2	2	x
+58		Tingyun		3,5	3,5	3,5	3,5	3,5	3,5	3,5	x
+59		Topaz & Numby		3	5	x	x	x	x	x	1,5
+60		The Herta		8	11	x	x	x	x	x	2
+61		Welt		1,5	1,5	2	2	2,5	x	x	x
+62		Xueyi		1,5	1,5	1,5	1,5	1,5	1,5	1,5	x
+63		Yunli		5	9,5	x	x	x	x	x	2,5
+64		Yanqing		1,5	1,5	2	2	3,5	3,5	x	x
+65		Yukong		2,5	2,5	2,5	2,5	2,5	2,5	2,5	x

@@ -95,6 +95,8 @@ export default function AudiencePage() {
         <SelectingPriorityScreen
           onNext={handleNextSelectPriority}
           currentTeam={currentTeam}
+          turn={roomData.turn}
+          teams={roomData.teams}
         />
       )}
 
@@ -103,6 +105,7 @@ export default function AudiencePage() {
           readonly
           teams={roomData.teams}
           onNext={handleNextSelectNode}
+          turn={roomData.turn}
         />
       )}
 

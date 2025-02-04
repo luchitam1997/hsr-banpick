@@ -64,6 +64,8 @@ export interface Turn {
   currentRound: number;
   currentCharacter: string;
   currentSelect: Order | null;
+  currentPriority: DiceType | null;
+  currentNode: string | null;
 }
 
 export interface Order {

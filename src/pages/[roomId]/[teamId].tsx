@@ -27,14 +27,16 @@ export default function TeamPage() {
     nodeDisabled,
     disabledCharacters,
     selectedCharacter,
-
+    opponentTeam,
     handleConfirmBan,
     handleConfirmPick,
     handleSelect,
     handleRoll,
     handleSelectNode,
+    handleConfirmNode,
     handleSelectPriority,
     handleSelectRelic,
+    handleConfirmPriority,
   } = useOnTeam();
 
   const teamAReadOnly = useMemo(() => {
@@ -60,56 +62,59 @@ export default function TeamPage() {
       </Head>
 
       {/* Select Character */}
-      {(roomData?.status === RoomStatus.SELECTING_CHARACTER ||
-        roomData?.status === RoomStatus.SELECTING_RELIC ||
-        roomData?.status === RoomStatus.PLAYING) && (
-        <div>
-          {/* Header */}
-          <div className="w-full h-full flex items-center gap-1">
-            <p className="text-secondary text-2xl font-bold">
-              Honkai Star Rail: All stars competition /
-            </p>
-            <p className="text-primary text-2xl font-bold">{roomData?.name}</p>
-          </div>
+      {roomData &&
+        (roomData.status === RoomStatus.SELECTING_CHARACTER ||
+          roomData.status === RoomStatus.SELECTING_RELIC ||
+          roomData.status === RoomStatus.PLAYING) && (
+          <div>
+            {/* Header */}
+            <div className="w-full h-full flex items-center gap-1">
+              <p className="text-secondary text-2xl font-bold">
+                Honkai Star Rail: All stars competition /
+              </p>
+              <p className="text-primary text-2xl font-bold">
+                {roomData?.name}
+              </p>
+            </div>
 
-          <div className="mt-4 flex flex-row gap-4">
-            {/* Team A */}
-            {roomData && roomData.teams[0] && currentTeam && (
-              <TeamColumn
-                team="blue"
-                data={roomData.teams[0]}
+            <div className="mt-4 flex flex-row gap-4">
+              {/* Team A */}
+              {roomData && roomData.teams[0] && currentTeam && (
+                <TeamColumn
+                  team="blue"
+                  data={roomData.teams[0]}
+                  turn={currentTurn}
+                  onSelectRelic={handleSelectRelic}
+                  readOnly={teamAReadOnly}
+                />
+              )}
+
+              <SelectCharacter
+                readOnly={!isCurrentTurn}
+                onSelect={handleSelect}
+                onConfirmPick={handleConfirmPick}
+                onConfirmBan={handleConfirmBan}
+                selectedCharacter={selectedCharacter}
+                disabledCharacters={disabledCharacters}
+                status={roomData.status}
+                orders={roomData.order}
                 turn={currentTurn}
-                onSelectRelic={handleSelectRelic}
-                readOnly={teamAReadOnly}
+                teams={roomData.teams}
               />
-            )}
 
-            <SelectCharacter
-              readOnly={!isCurrentTurn}
-              onSelect={handleSelect}
-              onConfirmPick={handleConfirmPick}
-              onConfirmBan={handleConfirmBan}
-              selectedCharacter={selectedCharacter}
-              disabledCharacters={disabledCharacters}
-              status={roomData?.status}
-              orders={roomData?.order}
-              turn={currentTurn}
-              teams={roomData?.teams}
-            />
-
-            {/* Team B */}
-            {roomData && roomData.teams[1] && currentTeam && (
-              <TeamColumn
-                team="red"
-                data={roomData.teams[1]}
-                turn={currentTurn}
-                onSelectRelic={handleSelectRelic}
-                readOnly={teamBReadOnly}
-              />
-            )}
+              {/* Team B */}
+              {roomData && roomData.teams[1] && currentTeam && (
+                <TeamColumn
+                  team="red"
+                  data={roomData.teams[1]}
+                  turn={currentTurn}
+                  onSelectRelic={handleSelectRelic}
+                  readOnly={teamBReadOnly}
+                />
+              )}
+            </div>
           </div>
-        </div>
-      )}
+        )}
 
       {/* Waiting */}
       {isWaiting && <WaitingScreen title="Waiting for game start" />}
@@ -123,23 +128,26 @@ export default function TeamPage() {
         />
       )}
 
-      {isSelectingPriority &&
-        (isCurrentTurn ? (
-          <SelectingPriorityScreen
-            onSelectPriority={handleSelectPriority}
-            currentTeam={currentTeam}
-          />
-        ) : (
-          <WaitingScreen title="Waiting for other team" />
-        ))}
+      {isSelectingPriority && roomData && currentTeam && opponentTeam && (
+        <SelectingPriorityScreen
+          onSelectPriority={handleSelectPriority}
+          onConfirmPriority={handleConfirmPriority}
+          teams={roomData.teams}
+          turn={roomData.turn}
+          currentTeam={currentTeam}
+          opponentTeam={opponentTeam}
+        />
+      )}
 
       {isSelectingNode && roomData && currentTeam && (
         <SelectingNodeScreen
           onSelectNode={handleSelectNode}
+          onConfirmNode={handleConfirmNode}
           nodeDisabled={nodeDisabled}
           isCurrentTurn={isCurrentTurn}
           readonly={false}
           teams={roomData.teams}
+          turn={roomData.turn}
         />
       )}
 

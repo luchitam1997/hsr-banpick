@@ -135,7 +135,10 @@ export const useOnTeam = () => {
   };
 
   const handleConfirmPick = async (params: CharacterSelect) => {
-    if (!roomData || !currentTeam || !opponentTeam) return;
+    if (!roomData || !currentTeam) return;
+
+    // if character is not be selected, then return
+    if (!roomData.turn.currentCharacter) return;
 
     // Check if this is the last pick/ban
     const isLastTurn = roomData.turn.currentRound === roomData.order.length - 1;
@@ -167,6 +170,8 @@ export const useOnTeam = () => {
       ? {
           currentSelect: null,
           currentCharacter: "",
+          currentPriority: null,
+          currentNode: null,
           currentRound: 0,
           currentPlayer: "",
         }
@@ -175,6 +180,8 @@ export const useOnTeam = () => {
           currentCharacter: "",
           currentRound: nextRound,
           currentPlayer: nextPlayer,
+          currentPriority: null,
+          currentNode: null,
         };
 
     await set(roomRef, {
@@ -187,13 +194,10 @@ export const useOnTeam = () => {
   };
 
   const handleConfirmBan = async () => {
-    if (!roomData) return;
+    if (!roomData || !currentTeam) return;
 
-    const currentTeam = roomData.teams.find(
-      (team) => team.id === roomData.turn.currentPlayer
-    );
-
-    if (!currentTeam) return;
+    // if character is not be selected, then return
+    if (!roomData.turn.currentCharacter) return;
 
     for (let i = 0; i < currentTeam.bans.length; i++) {
       if (!currentTeam.bans[i]) {
@@ -215,6 +219,8 @@ export const useOnTeam = () => {
       currentCharacter: "",
       currentRound: nextRound,
       currentPlayer: nextPlayer,
+      currentPriority: null,
+      currentNode: null,
     };
 
     const status = RoomStatus.SELECTING_CHARACTER;
@@ -282,11 +288,14 @@ export const useOnTeam = () => {
   const handleSelectPriority = async (priority: DiceType) => {
     if (!roomData || !currentTeam || !opponentTeam) return;
 
-    const updateRoomData = {
+    if (currentTeam.selectPriority) return;
+
+    const updateRoomData: RoomData = {
       ...roomData,
-      teams: roomData.teams.map((team) =>
-        team.id === teamId ? { ...team, selectPriority: priority } : team
-      ),
+      turn: {
+        ...roomData.turn,
+        currentPriority: priority,
+      },
     };
     await set(roomRef, updateRoomData);
   };
@@ -294,16 +303,66 @@ export const useOnTeam = () => {
   const handleSelectNode = async (map: "11.1" | "11.2" | "12.1" | "12.2") => {
     if (!roomData || !currentTeam || !opponentTeam) return;
 
-    const updatedTeam: Team = {
-      ...currentTeam,
-      node: map,
+    if (currentTeam.node) return;
+
+    // const updatedTeam: Team = {
+    //   ...currentTeam,
+    //   node: map,
+    // };
+
+    const updateRoomData: RoomData = {
+      ...roomData,
+      turn: {
+        ...roomData.turn,
+        currentNode: map,
+      },
     };
 
-    const updateRoomData = {
+    await set(roomRef, updateRoomData);
+  };
+
+  const handleConfirmPriority = async () => {
+    if (!roomData || !currentTeam || !opponentTeam) return;
+    if (!roomData.turn.currentPriority) return;
+
+    const updateTeam: Team = {
+      ...currentTeam,
+      selectPriority: roomData.turn.currentPriority,
+    };
+
+    const updateRoomData: RoomData = {
+      ...roomData,
+      teams: roomData.teams.map((team) =>
+        team.id === teamId ? updateTeam : team
+      ),
+      turn: {
+        ...roomData.turn,
+        currentPriority: null,
+        currentPlayer: opponentTeam.id,
+      },
+    };
+    await set(roomRef, updateRoomData);
+  };
+
+  const handleConfirmNode = async () => {
+    if (!roomData || !currentTeam || !opponentTeam) return;
+    if (!roomData.turn.currentNode) return;
+
+    const updatedTeam: Team = {
+      ...currentTeam,
+      node: roomData.turn.currentNode,
+    };
+
+    const updateRoomData: RoomData = {
       ...roomData,
       teams: roomData.teams.map((team) =>
         team.id === teamId ? updatedTeam : team
       ),
+      turn: {
+        ...roomData.turn,
+        currentNode: null,
+        currentPlayer: opponentTeam.id,
+      },
     };
 
     await set(roomRef, updateRoomData);
@@ -354,5 +413,7 @@ export const useOnTeam = () => {
     handleSelectNode,
     handleSelectPriority,
     handleSelectRelic,
+    handleConfirmNode,
+    handleConfirmPriority,
   };
 };

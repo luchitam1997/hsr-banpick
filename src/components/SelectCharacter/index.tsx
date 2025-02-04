@@ -59,7 +59,8 @@ export function SelectCharacter({
   });
 
   const handleSelectChar = (character: Character) => {
-    if (readOnly || !onSelect) return;
+    if (readOnly || !onSelect || disabledCharacters.includes(character.name))
+      return;
     onSelect(character);
 
     // if (
@@ -156,12 +157,40 @@ export function SelectCharacter({
     });
   };
 
+  const isSelectComplete = useMemo(() => {
+    if (!teams) return false;
+    const teamAPickLength = teams[0].picks.length;
+    const teamBPickLength = teams[1].picks.length;
+    return (
+      !!teams[0].picks[teamAPickLength - 1].character &&
+      !!teams[1].picks[teamBPickLength - 1].character
+    );
+  }, [teams]);
+
+  const currentPlayer = useMemo(() => {
+    if (!turn || !teams) return;
+    return teams.find((team) => team.id === turn.currentPlayer);
+  }, [turn, teams]);
+
+  const currentOrder = useMemo(() => {
+    if (!turn || !orders) return;
+    return orders[turn.currentRound].order;
+  }, [turn, orders]);
+
   return (
     <div className="basis-1/2">
       {teams && (
         <div className="w-full flex items-center justify-between mt-4">
           <p className="text-white text-2xl font-bold text-center border border-blue-500 rounded-lg p-2 w-[100px]">
             {teams[0].totalPoints}
+          </p>
+          <p className="text-primary text-2xl font-bold text-center">
+            {status === RoomStatus.SELECTING_CHARACTER &&
+              (isSelectComplete
+                ? "Đợi host xác nhận"
+                : `Team ${currentPlayer?.name} ${currentOrder}`)}
+            {status === RoomStatus.SELECTING_RELIC && `Thời gian chọn tinh hồn`}
+            {status === RoomStatus.PLAYING && `Trận đấu đang diễn ra`}
           </p>
           <p className="text-white text-2xl font-bold text-center border border-red-500 rounded-lg p-2 w-[100px]">
             {teams[1].totalPoints}
@@ -249,9 +278,8 @@ export function SelectCharacter({
                 order.team === "blue" ? "bg-blue-500" : "bg-red-500"
               } ${
                 turn?.currentRound === index &&
-                status === RoomStatus.SELECTING_CHARACTER
-                  ? "animate-pulse"
-                  : ""
+                status === RoomStatus.SELECTING_CHARACTER &&
+                "animate-pulse !bg-gray-500"
               } ${order.team === "red" ? "translate-y-full" : ""}`}
             >
               {order.order === SelectType.PICK ? "Pick" : "Ban"}
@@ -262,7 +290,9 @@ export function SelectCharacter({
 
       {status === RoomStatus.SELECTING_CHARACTER &&
         onConfirmBan &&
-        turn?.currentSelect?.order === SelectType.BAN && (
+        turn &&
+        turn.currentSelect &&
+        turn.currentSelect.order === SelectType.BAN && (
           <div className="w-full flex items-center justify-center mt-20">
             <button
               className={`w-1/2 h-[40px] bg-[#1c1c1c] border border-[#272727] text-primary rounded hover:bg-[#272727] ${
@@ -278,7 +308,9 @@ export function SelectCharacter({
 
       {status === RoomStatus.SELECTING_CHARACTER &&
         onConfirmPick &&
-        turn?.currentSelect?.order === SelectType.PICK && (
+        turn &&
+        turn.currentSelect &&
+        turn.currentSelect.order === SelectType.PICK && (
           <div className="w-full flex items-center justify-center mt-20">
             <button
               className={`w-1/2 h-[40px] bg-[#1c1c1c] border border-[#272727] text-primary rounded hover:bg-[#272727] ${

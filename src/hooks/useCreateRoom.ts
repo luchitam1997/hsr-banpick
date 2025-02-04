@@ -81,6 +81,8 @@ export const useCreateRoom = () => {
           currentRound: 0,
           currentCharacter: "",
           currentSelect: null,
+          currentPriority: null,
+          currentNode: null,
         },
       };
 

@@ -91,7 +91,7 @@ export default function AudiencePage() {
         <DicingScreen teams={roomData.teams} onNext={handleNextDicing} />
       )}
 
-      {isSelectPriority && roomData && currentTeam && (
+      {isSelectPriority && roomData && (
         <SelectingPriorityScreen
           onNext={handleNextSelectPriority}
           currentTeam={currentTeam}
@@ -100,7 +100,7 @@ export default function AudiencePage() {
         />
       )}
 
-      {isSelectNode && roomData && currentTeam && (
+      {isSelectNode && roomData && (
         <SelectingNodeScreen
           readonly
           teams={roomData.teams}

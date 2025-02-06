@@ -176,30 +176,16 @@ export const useOnAudiences = () => {
   };
 
   const handleNextSelectPriority = async () => {
-    if (!roomData) return;
+    if (!roomData || !roomData.teams) return;
 
-    const teamSelected = roomData.teams.find((team) => team.selectPriority);
+    const isSelected = roomData.teams.every((team) => team.selectPriority);
+    if (!isSelected) return;
 
-    if (!teamSelected) return;
-
-    const opponentTeam = roomData.teams.find(
-      (team) => team.id !== teamSelected.id
-    );
-
-    if (!opponentTeam) return;
-
-    const opponentPriority =
-      teamSelected.selectPriority === DiceType.NODE
-        ? DiceType.BANPICK_FIRST
-        : DiceType.NODE;
+    const teams = roomData.teams;
 
     const isSwitchTeam =
-      (teamSelected.selectPriority === DiceType.BANPICK_FIRST &&
-        teamSelected.id === roomData.teams[1].id) ||
-      (teamSelected.selectPriority === DiceType.BANPICK_LAST &&
-        teamSelected.id === roomData.teams[0].id) ||
-      (teamSelected.selectPriority === DiceType.NODE &&
-        teamSelected.id === roomData.teams[0].id);
+      teams[1].selectPriority === DiceType.BANPICK_FIRST ||
+      teams[0].selectPriority === DiceType.BANPICK_LAST;
 
     const newTeams = isSwitchTeam ? roomData.teams.reverse() : roomData.teams;
 
@@ -208,16 +194,11 @@ export const useOnAudiences = () => {
       status: RoomStatus.SELECTING_NODE,
       turn: {
         ...roomData.turn,
-        currentPlayer:
-          teamSelected.selectPriority === DiceType.NODE
-            ? teamSelected.id
-            : opponentTeam.id,
+        currentPlayer: newTeams.find(
+          (team) => team.selectPriority === DiceType.NODE
+        )?.id,
       },
-      teams: newTeams.map((team) =>
-        team.id === opponentTeam.id
-          ? { ...team, selectPriority: opponentPriority }
-          : team
-      ),
+      teams: newTeams,
     };
 
     await set(roomRef, updateRoomData);

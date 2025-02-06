@@ -330,6 +330,8 @@ export const useOnTeam = () => {
       selectPriority: roomData.turn.currentPriority,
     };
 
+    const isLastCheck = !!opponentTeam.selectPriority;
+
     const updateRoomData: RoomData = {
       ...roomData,
       teams: roomData.teams.map((team) =>
@@ -338,7 +340,7 @@ export const useOnTeam = () => {
       turn: {
         ...roomData.turn,
         currentPriority: null,
-        currentPlayer: opponentTeam.id,
+        currentPlayer: !isLastCheck ? opponentTeam.id : "",
       },
     };
     await set(roomRef, updateRoomData);
@@ -347,6 +349,8 @@ export const useOnTeam = () => {
   const handleConfirmNode = async () => {
     if (!roomData || !currentTeam || !opponentTeam) return;
     if (!roomData.turn.currentNode) return;
+
+    const isLastCheck = !!opponentTeam.node;
 
     const updatedTeam: Team = {
       ...currentTeam,
@@ -361,7 +365,7 @@ export const useOnTeam = () => {
       turn: {
         ...roomData.turn,
         currentNode: null,
-        currentPlayer: opponentTeam.id,
+        currentPlayer: !isLastCheck ? opponentTeam.id : "",
       },
     };
 

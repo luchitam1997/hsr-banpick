@@ -184,6 +184,10 @@ export function SelectCharacter({
           <p className="text-white text-2xl font-bold text-center border border-blue-500 rounded-lg p-2 w-[100px]">
             {teams[0].totalPoints}
           </p>
+          <p className="text-primary text-5xl font-bold text-center">
+            {teams[0].node}
+          </p>
+
           <p className="text-primary text-2xl font-bold text-center">
             {status === RoomStatus.SELECTING_CHARACTER &&
               (isSelectComplete
@@ -191,6 +195,10 @@ export function SelectCharacter({
                 : `Team ${currentPlayer?.name} ${currentOrder}`)}
             {status === RoomStatus.SELECTING_RELIC && `Thời gian chọn tinh hồn`}
             {status === RoomStatus.PLAYING && `Trận đấu đang diễn ra`}
+          </p>
+
+          <p className="text-primary text-5xl font-bold text-center">
+            {teams[1].node}
           </p>
           <p className="text-white text-2xl font-bold text-center border border-red-500 rounded-lg p-2 w-[100px]">
             {teams[1].totalPoints}

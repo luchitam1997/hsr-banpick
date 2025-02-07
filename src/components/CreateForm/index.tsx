@@ -51,9 +51,9 @@ export function CreateForm() {
   const { teamAUrl, teamBUrl, audienceUrl } = useMemo(() => {
     if (roomId) {
       return {
-        teamAUrl: `/${roomId}/${teamAId}`,
-        teamBUrl: `/${roomId}/${teamBId}`,
-        audienceUrl: `/${roomId}/audiences`,
+        teamAUrl: `${window.location.origin}/${roomId}/${teamAId}`,
+        teamBUrl: `${window.location.origin}/${roomId}/${teamBId}`,
+        audienceUrl: `${window.location.origin}/${roomId}/audiences`,
       };
     }
     return {
@@ -69,6 +69,7 @@ export function CreateForm() {
       console.log(roomData);
 
       try {
+        setLoading(true);
         const result = await createRoom(roomData);
         if (result) {
           setRoomId(result.roomId);
@@ -77,7 +78,6 @@ export function CreateForm() {
         }
       } catch (error) {
         setError("Error creating room");
-        setLoading(false);
       } finally {
         setLoading(false);
       }

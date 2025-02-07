@@ -207,7 +207,7 @@ export function SelectCharacter({
       )}
 
       {/* Characters list */}
-      <div className="w-full h-[400px] overflow-y-auto bg-[#1c1c1c] border border-[#272727] rounded p-4 mt-4 ">
+      <div className="w-full h-[400px] overflow-y-auto no-scrollbar bg-[#1c1c1c] border border-[#272727] rounded p-4 mt-4 ">
         {filteredCharacters.length > 0 ? (
           <div className="w-full grid grid-cols-8 gap-2">
             {filteredCharacters.map((character, index) => (
@@ -228,9 +228,9 @@ export function SelectCharacter({
                   }`}
                   onClick={() => handleSelectChar(character)}
                 />
-                <span className="w-full text-primary text-xs font-bold text-center text-ellipsis overflow-hidden whitespace-nowrap">
+                {/* <span className="w-full text-primary text-xs font-bold text-center text-ellipsis overflow-hidden whitespace-nowrap">
                   {character.name}
-                </span>
+                </span> */}
               </div>
             ))}
           </div>

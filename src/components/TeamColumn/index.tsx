@@ -76,10 +76,15 @@ export function TeamColumn({
       </div>
 
       {/* Pick Cards */}
-      <div className="w-full grid grid-cols-2 gap-3">
+      <div
+        className={`w-full grid ${
+          data.picks.length > 5 ? "grid-cols-2" : "grid-cols-1"
+        } gap-3`}
+      >
         {data.picks.map((character, index) => (
           <PickCard
             key={index}
+            placement={team === "blue" ? "left" : "right"}
             confirmedCharacter={character}
             isCurrentTurn={isActive(index, SelectType.PICK)}
             selectedCharacter={selectedCharacter}
@@ -90,7 +95,11 @@ export function TeamColumn({
       </div>
 
       {/* Ban Cards */}
-      <div className="w-full grid grid-cols-2 gap-3 mt-5">
+      <div
+        className={`w-full flex gap-3 mt-5 ${
+          team === "blue" && "flex-row-reverse"
+        }`}
+      >
         {data.bans.map((character, index) => (
           <BanCard
             key={index}

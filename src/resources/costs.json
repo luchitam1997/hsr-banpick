@@ -122,7 +122,7 @@
   {
     "id": 21,
     "name": "Aglaea",
-    "costs": [8, 12, null, null, null, null, null],
+    "costs": [7, 12, null, null, null, null, null],
     "weapon": 2
   },
   {
@@ -134,7 +134,7 @@
   {
     "id": 23,
     "name": "Yanqing",
-    "costs": [1.5, 1.5, 2, 2, 3.5, null, null],
+    "costs": [1.5, 1.5, 2, 2, 3.5, 3.5, null],
     "weapon": 0
   },
   {
@@ -152,7 +152,7 @@
   {
     "id": 26,
     "name": "Tingyun",
-    "costs": [3.5, 3.5, 3.5, 3.5, 3.5, 3.5, 3.5],
+    "costs": [4, 4, 4, 4, 4, 4, 4],
     "weapon": 0
   },
   {
@@ -290,7 +290,7 @@
   {
     "id": 49,
     "name": "Argenti",
-    "costs": [3.5, 5, null, null, null, null, null],
+    "costs": [3.5, 5, 8, 9, null, null, null],
     "weapon": 1
   },
   {

@@ -219,12 +219,12 @@
     "id": 37,
     "name": "Yunli",
     "costs": [5, 9.5, null, null, null, null, null],
-    "weapon": 2
+    "weapon": 2.5
   },
   {
     "id": 38,
     "name": "Jiaoqiu",
-    "costs": [3.5, 5.5, null, null, null, null, null],
+    "costs": [3.5, 5.5, 8, 8.5, null, null, null],
     "weapon": 2
   },
   {
@@ -314,7 +314,7 @@
   {
     "id": 53,
     "name": "Sparkle",
-    "costs": [3.5, 4.5, null, null, null, null, null],
+    "costs": [4.5, 5.5, null, null, null, null, null],
     "weapon": 1
   },
   {
@@ -326,13 +326,13 @@
   {
     "id": 55,
     "name": "Rappa",
-    "costs": [5, 7.5, null, null, null, null, null],
+    "costs": [5, 7.5, 17, 17.5, null, null, null],
     "weapon": 2
   },
   {
     "id": 56,
     "name": "Sunday",
-    "costs": [4, 7, null, null, null, null, null],
+    "costs": [4.5, 7.5, null, null, null, null, null],
     "weapon": 2
   },
   {
